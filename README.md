@@ -1,7 +1,7 @@
 # DartArena
-# Zadatak
+## Zadatak
 Web-aplikacija za igru pikada s mogućnostima praćenja rezultata i statistike
-# Opis zadatka
+## Opis zadatka
 Pikado je popularna društvena igra koja se tradicionalno igra uz fizičku metu i automatizirani sustav za zbrajanje
  bodova. S obzirom na to da mnogi igrači žele precizno pratiti svoje rezultate, kao i uspjehe u različitim tipovima
  igara, postoji potreba za aplikacijom koja bi omogućila igru bez fizičke mete, ali s mogućnostima bilježenja svih
