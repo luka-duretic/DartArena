@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* 
+ovo je nacin definiranja custom novog tailwind-a v4 (nema tailwind.config.ts vise)
+  - format je: --vrsta_atributa-ime_custom: vrijednost;
+  - npr. vrsta_atributa za screen je breakpoint, a za color je color...
+*/
+@theme{
+  --breakpoint-xs: 450px;
+}
