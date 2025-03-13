@@ -7,7 +7,7 @@ import "swiper/swiper-bundle.css";
 export default function Slider() {
   return (
     <>
-      <div className="bg-gray-100 text-gray-700 h-[90%]">
+      <div className="bg-background text-textColorDark h-[90%]">
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={50}

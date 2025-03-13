@@ -48,7 +48,7 @@ export default function SignInModal() {
 
   return (
     <>
-      <div className="bg-gray-100 text-gray-700 rounded-[1rem] h-[31rem] w-[90%] xs:w-[65%] sm:w-[58%] md:w-[47%] lg:w-[38%] border-2 border-white flex flex-col p-8 justify-between">
+      <div className="bg-background text-textColorDark rounded-[1rem] h-[31rem] w-[90%] xs:w-[65%] sm:w-[58%] md:w-[47%] lg:w-[38%] border-2 border-background flex flex-col p-8 justify-between">
         <div>
           <h2 className="font-bold text-[21px] sm:text-[22px] md:text-[24px] lg:text-[26px] mb-4 cursor-default">
             Welcome back 👋
@@ -64,7 +64,7 @@ export default function SignInModal() {
               onChange={inputOnChange}
               placeholder="me@example.com"
               className={
-                "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 " +
+                "bg-inputBg py-2 px-3 w-full rounded-md mt-3 " +
                 (serverErrorMessage
                   ? "border-[1.5px] border-red-500 outline-red-500"
                   : "outline-indigo-500")
@@ -78,7 +78,7 @@ export default function SignInModal() {
                 onChange={passwordOnChange}
                 placeholder="password"
                 className={
-                  "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 " +
+                  "bg-inputBg py-2 px-3 w-full rounded-md mt-3 " +
                   (serverErrorMessage
                     ? "border-[1.5px] border-red-500 outline-red-500"
                     : "outline-indigo-500")
@@ -111,13 +111,13 @@ export default function SignInModal() {
             <div className="buttons mt-3">
               <button
                 type="submit"
-                className="cursor-pointer bg-indigo-500 text-white rounded-md px-4 py-2 mr-2 hover:bg-indigo-700 transition duration-300"
+                className="cursor-pointer bg-indigo-500 text-buttonLetter rounded-md px-4 py-2 mr-2 hover:bg-indigo-700 transition duration-300"
               >
                 Sign in
               </button>
 
               <Link href="/">
-                <button className="cursor-pointer bg-[#737380] text-white rounded-md p-2 px-4 hover:bg-red-600 transition duration-300">
+                <button className="cursor-pointer bg-[#737380] text-buttonLetter rounded-md p-2 px-4 hover:bg-red-600 transition duration-300">
                   Close
                 </button>
               </Link>

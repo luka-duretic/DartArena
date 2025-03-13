@@ -1,10 +1,10 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import CountrySelector from "../components/CountrySelector";
+import CountryInput from "../components/CountryInput";
 
 const signUpSchema = z.object({
   first_name: z
@@ -54,6 +54,10 @@ function SignUpPage() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  const handleCountry = (value:any) => {
+    setFormData({ ...formData, ["country"]: value });
+  }
 
   //provjera formata inputa na submit
   const handleSubmit = async (e: any) => {
@@ -105,7 +109,7 @@ function SignUpPage() {
 
   return (
     <div
-      className="min-h-screen max-w-screen bg-cover bg-amber-300 overflow-y-auto xs:overflow-y-hidden pb-[8rem] xs:pb-0"
+      className="min-h-screen max-w-screen bg-cover overflow-y-auto xs:overflow-y-hidden pb-[8rem] xs:pb-0"
       style={{ backgroundImage: "url('./images/bg1.png')" }}
     >
       <div className="flex justify-center md:justify-between items-center h-[16vh]">
@@ -115,7 +119,7 @@ function SignUpPage() {
         />
 
         <Link href={"/sign-in"} className="no-underline pr-[2.5rem] hidden md:block">
-          <div className="group flex flex-row gap-1 cursor-pointer w-[200px] md:w-[260px] bg-gray-100 text-textColor p-[0.8rem] md:p-[1rem] text-xs md:text-sm rounded-[0.7rem] hover:bg-gray-300 transition duration-300 hover:text-white">
+          <div className="group flex flex-row gap-1 cursor-pointer w-[200px] md:w-[260px] bg-background text-textColorDark p-[0.8rem] md:p-[1rem] text-xs md:text-sm rounded-[0.7rem] hover:bg-modalHover transition duration-300 hover:text-white">
             <span className="message">Already have an account? </span>
             <span className="signUp text-indigo-500 pr-5 group-hover:pr-0">
               Sign in
@@ -127,8 +131,8 @@ function SignUpPage() {
         </Link>
       </div>
       <div className="h-[80vh] flex justify-center items-start pt-5 pb-10">
-        <div className=" bg-gray-100 rounded-[0.7rem] p-[1.4rem] pb-5 mt-[2rem] sm:mt-[3.5rem] w-[85%] xs:w-[90%] sm:w-[75%] md:w-[65%] lg:w-[50%] h-[auto] text-gray-700">
-          <h3 className="w-full flex justify-center items-center text-xl font-semibold cursor-default">
+        <div className=" bg-background rounded-[0.7rem] p-[1.4rem] pb-5 mt-[2rem] sm:mt-[3.5rem] w-[85%] xs:w-[90%] sm:w-[75%] md:w-[65%] lg:w-[50%] h-[auto] text-textColorDark">
+          <h3 className="w-full flex justify-center items-center text-2xl font-semibold cursor-default">
             Create an account
           </h3>
 
@@ -142,7 +146,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Firstname"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.first_name
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -163,7 +167,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Lastname"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.last_name
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -184,7 +188,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Nickname"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.nickname
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -198,7 +202,7 @@ function SignUpPage() {
                   </div>
                 )}
 
-                <CountrySelector />
+                <CountryInput handleCountry={handleCountry}/>
               </div>
 
               <div className="flex flex-col w-full xs:gap-3 xs:w-1/2">
@@ -209,7 +213,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="E-mail"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.email
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -230,7 +234,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Password"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.password
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -251,7 +255,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Team (optional)"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.team
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -271,7 +275,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder="League (optional)"
                   className={
-                    "bg-gray-200 py-2 px-3 w-full rounded-md mt-3 border-1 border-gray-300 " +
+                    "bg-inputBg py-2 px-3 w-full rounded-md mt-3 border-1 border-inputBorder " +
                     (errors.league
                       ? "border-[1.5px] border-red-500 outline-red-500"
                       : "outline-indigo-500")
@@ -289,12 +293,12 @@ function SignUpPage() {
             <div className="buttons ml-2 mt-[1.4rem] xs:mt-[3rem] flex justify-center items-center">
               <button
                 type="submit"
-                className="cursor-pointer rounded-[0.5rem] mr-3 py-[0.4rem] px-[0.6rem] bg-indigo-500 text-gray-100 hover:bg-indigo-700 transition duration-300 md:py-2 md:px-[1.8rem]"
+                className="cursor-pointer rounded-[0.5rem] mr-3 py-[0.4rem] px-[0.6rem] bg-indigo-500 text-buttonLetter hover:bg-indigo-700 transition duration-300 md:py-2 md:px-[1.8rem]"
               >
                 Continue
               </button>
               <Link href={"/"} className="no-underline">
-                <button className="cursor-pointer mr-2 py-[0.4rem] px-[0.8rem] bg-gray-500 text-gray-100 rounded-[0.5rem] hover:bg-red-600 transition duration-300 md:py-2 md:px-[1.8rem]">
+                <button className="cursor-pointer mr-2 py-[0.4rem] px-[0.8rem] bg-gray-500 text-buttonLetter rounded-[0.5rem] hover:bg-red-600 transition duration-300 md:py-2 md:px-[1.8rem]">
                   Close
                 </button>
               </Link>
