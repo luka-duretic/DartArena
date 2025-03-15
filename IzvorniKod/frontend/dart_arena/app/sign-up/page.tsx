@@ -109,10 +109,10 @@ function SignUpPage() {
 
   return (
     <div
-      className="min-h-screen max-w-screen bg-cover overflow-y-auto xs:overflow-y-hidden pb-[8rem] xs:pb-0"
+      className="min-h-screen max-w-screen bg-cover  pb-[8rem] xs:pb-0"
       style={{ backgroundImage: "url('./images/bg1.png')" }}
     >
-      <div className="flex justify-center md:justify-between items-center h-[16vh]">
+      <div className="flex justify-center md:justify-between items-center h-[16%]">
         <img
           src="/images/logo.png"
           className="pt-[1.5rem] pl-[1.5rem] w-[15rem]"
@@ -130,7 +130,7 @@ function SignUpPage() {
           </div>
         </Link>
       </div>
-      <div className="h-[80vh] flex justify-center items-start pt-5 pb-10">
+      <div className="h-[80%] flex justify-center items-start pt-5 pb-10">
         <div className=" bg-background rounded-[0.7rem] p-[1.4rem] pb-5 mt-[2rem] sm:mt-[3.5rem] w-[85%] xs:w-[90%] sm:w-[75%] md:w-[65%] lg:w-[50%] h-[auto] text-textColorDark">
           <h3 className="w-full flex justify-center items-center text-2xl font-semibold cursor-default">
             Create an account

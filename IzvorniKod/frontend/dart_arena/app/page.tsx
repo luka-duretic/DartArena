@@ -90,7 +90,7 @@ export default function Home() {
           style={{ backgroundImage: "url('./images/bg1.png')" }}
         >
           {/* gornji dio */}
-          <div className="flex h-[35vh] justify-center items-start md:justify-start pl-[9%] lg:pl-[11%] pt-7 md:pt-20 w-full">
+          <div className="flex h-full justify-center items-start md:justify-start pl-[9%] lg:pl-[11%] pt-7 md:pt-10 w-full">
             <img
               src="/images/logo.png"
               alt="logo"
@@ -98,10 +98,10 @@ export default function Home() {
             />
           </div>
           {/* donji dio */}
-          <div className="flex flex-col-reverse md:flex-row h-[65vh] items-center justify-around pl-[2rem]">
+          <div className="flex flex-col-reverse md:flex-row h-full items-center justify-around pl-[2rem]">
             {/* gumbi */}
-            <div className="flex flex-col h-full justify-center items-center">
-              <div className="flex flex-col gap-4 mt-17 mb-6 md:mb-35 md:mt-35">
+            <div className="flex flex-col h-full justify-center items-center mt-10 md:mt-0">
+              <div className="flex flex-col gap-4 mt-17 mb-6 md:mb-35 md:mt-30">
                 <Link
                   href="/sign-in"
                   className="rounded-xl w-65 h-11 bg-gradient-to-r from-purple-500 to-purple-900 text-white font-semibold flex justify-center items-center hover:scale-105 hover:from-purple-700 hover:to-purple-900 transition duration-300"
@@ -124,7 +124,7 @@ export default function Home() {
               </Link>
             </div>
             {/* tekst */}
-            <div className="flex flex-col gap-5 w-[92%] md:w-[40%] sm:ml-8 mt-3 md:ml-0 md:-mt-12 cursor-default">
+            <div className="flex flex-col gap-5 w-[92%] md:w-[40%] sm:ml-8 mt-15 md:ml-0 md:-mt-12 cursor-default">
               <span className="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl break-before-left w-full lg:w-[70%]">
                 Level Up Your Dart Skills!🏆
               </span>
@@ -139,7 +139,7 @@ export default function Home() {
           </div>
         </div>
       )}
-      <div className="flex flex-col w-full h-screen">
+      <div className="flex flex-col justify-between bg-background w-full min-h-screen">
         <Slider />
         <Footer />
       </div>

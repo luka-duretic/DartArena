@@ -37,7 +37,7 @@ export default function SignInPage() {
       {/* ovo iskopirano sa pocetnog page-a ce sve biti samo pozadina modala */}
       {mobile ? (
         <div
-          className="overflow-y-hidden h-screen max-w-screen bg-cover flex flex-col items-start"
+          className="h-screen max-w-screen bg-cover flex flex-col items-start overflow-y-hidden"
           style={{ backgroundImage: "url('./images/bg1.png')" }}
         >
           {/* gornji dio */}
@@ -64,13 +64,13 @@ export default function SignInPage() {
             <div className="flex flex-col h-full justify-center items-center">
               <div className="flex flex-col gap-4 mb-5 mt-23">
                 <Link
-                  href="/sign_in"
+                  href="/sign-in"
                   className="rounded-xl w-65 h-11 bg-gradient-to-r from-purple-500 to-purple-900 text-white font-semibold flex justify-center items-center hover:scale-105 hover:from-purple-700 hover:to-purple-900 transition duration-300"
                 >
                   Sign in
                 </Link>
                 <Link
-                  href="/sign_up"
+                  href="/sign-up"
                   className="rounded-xl w-65 h-11 border-2 border-purple-400 text-purple-400 font-semibold flex justify-center items-center hover:scale-105 transition duration-300"
                 >
                   Create an account
@@ -85,14 +85,19 @@ export default function SignInPage() {
               </Link>
             </div>
           </div>
+          <div className="fixed overflow-y-auto inset-0 bg-black/20 backdrop-blur-sm z-30">
+            <div className="flex min-h-screen max-w-screen justify-center items-center">
+              <SignInModal />
+            </div>
+          </div>
         </div>
       ) : (
         <div
-          className="overflow-y-hidden h-screen max-w-screen bg-cover flex flex-col items-start"
+          className="h-screen max-w-screen bg-cover flex flex-col items-start overflow-y-hidden"
           style={{ backgroundImage: "url('./images/bg1.png')" }}
         >
           {/* gornji dio */}
-          <div className="flex h-[35vh] justify-center items-start md:justify-start pl-[9%] lg:pl-[11%] pt-7 md:pt-20 w-full">
+          <div className="flex h-full justify-center items-start md:justify-start pl-[9%] lg:pl-[11%] pt-7 md:pt-10 w-full">
             <img
               src="/images/logo.png"
               alt="logo"
@@ -100,18 +105,18 @@ export default function SignInPage() {
             />
           </div>
           {/* donji dio */}
-          <div className="flex flex-col-reverse md:flex-row h-[65vh] items-center justify-around pl-[2rem]">
+          <div className="flex flex-col-reverse md:flex-row h-full items-center justify-around pl-[2rem]">
             {/* gumbi */}
-            <div className="flex flex-col h-full justify-center items-center">
-              <div className="flex flex-col gap-4 mt-17 mb-6 md:mb-35 md:mt-35">
+            <div className="flex flex-col h-full justify-center items-center mt-10 md:mt-0">
+              <div className="flex flex-col gap-4 mt-17 mb-6 md:mb-35 md:mt-30">
                 <Link
-                  href="/sign_in"
+                  href="/sign-in"
                   className="rounded-xl w-65 h-11 bg-gradient-to-r from-purple-500 to-purple-900 text-white font-semibold flex justify-center items-center hover:scale-105 hover:from-purple-700 hover:to-purple-900 transition duration-300"
                 >
                   Sign in
                 </Link>
                 <Link
-                  href="/sign_up"
+                  href="/sign-up"
                   className="rounded-xl w-65 h-11 border-2 border-purple-400 text-purple-400 font-semibold flex justify-center items-center hover:scale-105 transition duration-300"
                 >
                   Create an account
@@ -126,7 +131,7 @@ export default function SignInPage() {
               </Link>
             </div>
             {/* tekst */}
-            <div className="flex flex-col gap-5 w-[92%] md:w-[40%] sm:ml-8 mt-3 md:ml-0 md:-mt-12 cursor-default">
+            <div className="flex flex-col gap-5 w-[92%] md:w-[40%] sm:ml-8 mt-15 md:ml-0 md:-mt-12 cursor-default">
               <span className="text-white font-extrabold text-3xl md:text-4xl lg:text-5xl break-before-left w-full lg:w-[70%]">
                 Level Up Your Dart Skills!🏆
               </span>
@@ -139,13 +144,13 @@ export default function SignInPage() {
               </span>
             </div>
           </div>
+          <div className="fixed overflow-y-auto inset-0 bg-black/20 backdrop-blur-sm z-30">
+            <div className="flex min-h-screen max-w-screen justify-center items-center">
+              <SignInModal />
+            </div>
+          </div>
         </div>
       )}
-      <div className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30">
-        <div className="flex h-screen w-screen justify-center items-center">
-          <SignInModal />
-        </div>
-      </div>
     </>
   );
 }

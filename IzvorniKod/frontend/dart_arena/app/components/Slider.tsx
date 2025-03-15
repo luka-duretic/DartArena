@@ -7,7 +7,7 @@ import "swiper/swiper-bundle.css";
 export default function Slider() {
   return (
     <>
-      <div className="bg-background text-textColorDark h-[90%]">
+      <div className="bg-background text-textColorDark h-full">
         <Swiper
           modules={[Navigation, Pagination, A11y]}
           spaceBetween={50}
@@ -22,16 +22,16 @@ export default function Slider() {
           className="h-full w-full"
         >
           <SwiperSlide>
-            <div className="h-full w-full flex flex-col md:flex-row items-center md:justify-center">
+            <div className="h-full w-full flex flex-col md:flex-row items-center md:justify-center pb-25 xs:pb-20 md:mt-10">
               <div className="md:h-full w-[80%] md:w-[60%] flex justify-center items-start md:items-center md:pl-20 xs:mt-2 sm:mt-6 md:mt-0">
                 <img
                   src={"/images/display_pic.png"}
                   alt={"game modes"}
-                  className="w-full md:w-[90%] h-[15rem] xs:h-[16.5rem] md:h-[33rem] object-contain  md:-ml-23"
+                  className="w-full  md:w-[90%] h-[15rem] xs:h-[16.5rem] md:h-[33rem] object-contain  md:-ml-23"
                   id="about"
                 />
               </div>
-              <div className="w-[75%] xs:w-[63%] md:w-[40%] xs:h-[63%] flex flex-col items-center xs:items-start justify-between">
+              <div className="w-[75%] xs:w-[63%] md:w-[40%] xs:h-[63%] md:mt-10 lg:-mt-35 flex flex-col items-center xs:items-start justify-between">
                 <span className="font-extrabold text-3xl xs:text-4xl lg:text-5xl break-before-left mb-5 xs:mb-4 md:mb-0 w-full h-[30%] flex items-center md:items-end lg:items-start">
                   SIGN UP AND TRY ALL GOME MODES
                 </span>
@@ -47,16 +47,16 @@ export default function Slider() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="h-full w-full flex flex-col md:flex-row items-center gap-6">
+            <div className="h-full w-full flex flex-col md:flex-row items-center gap-6 pb-25 xs:pb-20 md:mt-8">
               <div className="mt-8 md:h-full w-[80%] md:w-[60%] flex justify-center items-start md:items-center md:pl-20 sm:mt-6 md:mt-0">
                 <iframe
-                  className="h-[11rem] xs:h-[15rem] md:h-[20rem] lg:h-[27rem] w-full md:w-[90%] md:-ml-23"
+                  className="h-[11rem] xs:h-[15rem] md:h-[20rem] lg:h-[27rem] w-full md:w-[90%] md:-ml-23 md:mt-18"
                   src="https://www.youtube.com/embed/S2IT5twpMZ8?si=dd6b7N3W0WBnJSor"
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>
               </div>
-              <div className="w-[75%] md:w-[40%] md:h-[73%] flex flex-col items-center xs:items-start">
+              <div className="w-[75%] md:w-[40%] md:h-[73%] md:mt-10 lg:-mt-12 flex flex-col items-center xs:items-start">
                 <span className="font-extrabold text-3xl xs:text-4xl lg:text-5xl break-before-left mt-4 xs:mt-0 mb-3 xs:mb-0 w-full h-[30%] flex items-center xs:items-end lg:items-start">
                   Basics of the Throw: Pro Tips
                 </span>
@@ -75,7 +75,7 @@ export default function Slider() {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className="h-full w-full flex flex-col md:flex-row items-center md:justify-center">
+            <div className="h-full w-full flex flex-col md:flex-row items-center md:justify-center pb-25 xs:pb-20 md:mt-10">
               <div className="md:h-full w-[80%] md:w-[60%] flex justify-center items-start md:items-center md:pl-20 xs:mt-2 sm:mt-6 md:mt-0">
                 <img
                   src={"/images/promo_pic.jpg"}
@@ -84,7 +84,7 @@ export default function Slider() {
                   id="about"
                 />
               </div>
-              <div className="w-[75%] xs:w-[69%] md:w-[40%] xs:h-[63%] flex flex-col items-center xs:items-start justify-between">
+              <div className="w-[75%] xs:w-[69%] md:w-[40%] xs:h-[63%] md:mt-10 lg:-mt-35 flex flex-col items-center xs:items-start justify-between">
                 <span className="font-extrabold text-3xl xs:text-4xl lg:text-5xl break-before-left mb-5 xs:mb-4 md:mb-0 w-full h-[30%] flex items-center md:items-end lg:items-start">
                   FREE AND AVAILABLE TO EVERYONE
                 </span>
