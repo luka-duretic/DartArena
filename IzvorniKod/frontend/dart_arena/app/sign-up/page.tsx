@@ -66,11 +66,11 @@ function SignUpPage() {
 
     // SALJEMO I DATUM PRIDRUZIVANJA
 
-    /*try {
+    try {
       signUpSchema.parse(formData);
       setErrors({});
 
-      apiCall(`/registrations`, {
+      /*apiCall(`/registrations`, {
         method: "POST",
         body: JSON.stringify({
           user: {
@@ -95,7 +95,8 @@ function SignUpPage() {
         })
         .catch((error) => {
           setServerErrorMessage(error.message);
-        });
+        });*/
+        alert("USPJESNOOOO BRAVO");
     } catch (error) {
       if (error instanceof z.ZodError) {
         const formattedErrors = error.errors.reduce((acc: any, curr) => {
@@ -104,7 +105,7 @@ function SignUpPage() {
         }, {});
         setErrors(formattedErrors);
       }
-    }*/
+    }
   };
 
   return (
@@ -137,8 +138,8 @@ function SignUpPage() {
           </h3>
 
           <form onSubmit={handleSubmit}>
-            <div className=" form-container mt-4 flex flex-col xs:flex-row justify-center items-center xs:gap-2 w-full">
-              <div className="flex flex-col xs:gap-3 w-full xs:w-1/2">
+            <div className=" form-container mt-4 flex flex-col xs:flex-row justify-center items-start xs:gap-2 w-full">
+              <div className="flex flex-col xs:gap-2 w-full xs:w-1/2">
                 <input
                   type="text"
                   name="first_name"
@@ -205,7 +206,7 @@ function SignUpPage() {
                 <CountryInput handleCountry={handleCountry}/>
               </div>
 
-              <div className="flex flex-col w-full xs:gap-3 xs:w-1/2">
+              <div className="flex flex-col w-full xs:gap-2 xs:w-1/2">
                 <input
                   type="text"
                   name="email"
