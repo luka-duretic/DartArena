@@ -63,13 +63,13 @@ export default function Home() {
               <div className="flex flex-col gap-4 mb-5 mt-23">
                 <Link
                   href="/sign-in"
-                  className="rounded-xl w-65 h-11 bg-gradient-to-r from-purple-500 to-purple-900 text-white font-semibold flex justify-center items-center hover:scale-105 hover:from-purple-700 hover:to-purple-900 transition duration-300"
+                  className="rounded-xl w-65 h-10 xs:h-11 bg-gradient-to-r from-purple-500 to-purple-900 text-white font-semibold flex justify-center items-center hover:scale-105 hover:from-purple-700 hover:to-purple-900 transition duration-300"
                 >
                   Sign in
                 </Link>
                 <Link
                   href="/sign-up"
-                  className="rounded-xl w-65 h-11 border-2 border-purple-400 text-purple-400 font-semibold flex justify-center items-center hover:scale-105 transition duration-300"
+                  className="rounded-xl w-65 h-10 xs:h-11 border-2 border-purple-400 text-purple-400 font-semibold flex justify-center items-center hover:scale-105 transition duration-300"
                 >
                   Create an account
                 </Link>

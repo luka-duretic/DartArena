@@ -38,7 +38,7 @@ function CountryInput({handleCountry}:any) {
       ...base,
       backgroundColor: (mode === "dark" ? "oklch(0.373 0.034 259.733)" : "oklch(0.928 0.006 264.531)"), 
       color: (mode === "dark" ? "oklch(0.707 0.022 261.325)" : "oklch(0.373 0.034 259.733)"),
-      padding: "2px",
+      padding: "1px",
       borderColor: (isFocused ? "oklch(0.585 0.233 277.117)" : (mode === "dark" ? "oklch(0.278 0.033 256.848)" : "oklch(0.872 0.01 258.338)")),
       "&:hover": { borderColor: "" },
     }),
@@ -53,7 +53,7 @@ function CountryInput({handleCountry}:any) {
     }),
   };
 
-  return <Select options={countryOptions} onChange={changeHandler} className="w-full rouned-lg mt-3" styles={custom}/>;
+  return <Select options={countryOptions} onChange={changeHandler} className="w-full text-sm xs:text-base rouned-lg mt-3" styles={custom}/>;
 }
 
 export default CountryInput;
