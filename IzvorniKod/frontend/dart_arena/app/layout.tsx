@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { IoSunny, IoMoonOutline } from "react-icons/io5";
+import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
 
 export default function RootLayout({
@@ -56,10 +57,10 @@ export default function RootLayout({
             <i className="fas fa-sun">
               <IoMoonOutline />
             </i>
-            <span className="ball"/>
+            <span className="ball" />
           </label>
         </div>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

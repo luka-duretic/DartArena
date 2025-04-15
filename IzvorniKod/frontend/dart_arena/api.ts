@@ -1,5 +1,5 @@
 export const apiCall = (url: `${string}`, options: RequestInit = {}) => {
-    // popravi .enc fajl
+    // popravi .env fajl
     return fetch(`http://localhost:8080${url}`, {
       ...options,
       headers: {
