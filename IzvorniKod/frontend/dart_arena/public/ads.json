@@ -1,0 +1,43 @@
+{
+    "ads":
+    [
+        {
+            "type": "picture",
+            "link": "https://www.darts-point.com",
+            "name": "/images/ad1.jpg"
+        },
+        {
+            "type": "picture",
+            "link": "https://www.darts-point.com",
+            "name": "/images/ad4.png"
+        },
+        {
+            "type": "picture",
+            "link": "https://www.target-darts.co.uk/omni",
+            "name": "/images/ad2.jpg"
+        },
+        {
+            "type": "picture",
+            "link": "https://www.targetdarts.com/virt",
+            "name": "/images/ad3.png"
+        },
+        {
+            "type": "video",
+            "src": "https://www.youtube.com/embed/aJzFLEkjMd4?si=VHx7_1uddCU0E6ka",
+            "title": "YouTube video player",
+            "allow": "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        },
+        {
+            "type": "video",
+            "src": "https://www.youtube.com/embed/mZi-emeK6e8?si=Hd0owxfvvqBxxukV",
+            "title": "YouTube video player",
+            "allow": "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        },
+        {
+            "type": "video",
+            "src": "https://www.youtube.com/embed/G5j-6UgQjTM?si=_vy7mQaN-oRvlO1L",
+            "title": "YouTube video player",
+            "allow": "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        }
+    ]
+}

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { IoSunny, IoMoonOutline } from "react-icons/io5";
 import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
+import { Provider } from "./client";
 
 export default function RootLayout({
   children,
@@ -37,6 +38,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={(mode === "dark" ? "dark" : "light") + " scroll-smooth"}
+      suppressHydrationWarning
     >
       {/* TAB izgled */}
       <link rel="icon" type="image/png" href="/images/icon.png" />
@@ -60,7 +62,9 @@ export default function RootLayout({
             <span className="ball" />
           </label>
         </div>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <Provider>{children}</Provider>
+        </AuthProvider>
       </body>
     </html>
   );

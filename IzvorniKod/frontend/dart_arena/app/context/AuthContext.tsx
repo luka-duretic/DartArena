@@ -1,3 +1,5 @@
+// KOMENTARI DA MOZES BEZ BACKENDA RADIT
+
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
@@ -36,12 +38,12 @@ export const AuthProvider = ({ children }: any) => {
       logout();
     } else {
 
-      const decoded = jwtDecode(newToken);
-      const now = Date.now() / 1000;
+      // const decoded = jwtDecode(newToken);
+      // const now = Date.now() / 1000;
 
-      if (decoded.exp != undefined && decoded.exp < now) {
-        logout(); // token istekao
-      }
+      // if (decoded.exp != undefined && decoded.exp < now) {
+      //   logout(); // token istekao
+      // }
 
       setToken(newToken);
     }
@@ -51,7 +53,7 @@ export const AuthProvider = ({ children }: any) => {
   const logout = () => {
     setToken("");
     localStorage.removeItem("token");
-    router.push("/");
+    //router.push("/");
   };
 
   return (

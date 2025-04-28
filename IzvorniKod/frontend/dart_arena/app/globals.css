@@ -10,13 +10,15 @@ ovo je nacin definiranja custom novog tailwind-a v4 (nema tailwind.config.ts vis
 
   /* custom theme light/dark */
   --color-textColorDark: var(--textColorDark);
-  --color-textColorLight: var(--textColorLight);
   --color-background: var(--background);
   --color-linkColor: var(--linkColor);
   --color-inputBg: var(--inputBg);
   --color-buttonLetter: var(--buttonLetter);
   --color-inputBorder: var(--inputBorder);
   --color-modalHover: var(--modalHover);
+  --color-background2: var(--background2);
+  --color-modalBg: var(--modalBg);
+  --color-modalShadow: var(--modalShadow)
 }
 
 .light {
@@ -27,7 +29,9 @@ ovo je nacin definiranja custom novog tailwind-a v4 (nema tailwind.config.ts vis
   --color-buttonLetter: white; /* white */
   --color-inputBorder: oklch(0.872 0.01 258.338); /* gray-300 */
   --color-modalHover: oklch(0.872 0.01 258.338); /* gray-300 */
-
+  --color-background2: oklch(0.928 0.006 264.531); /* gray-200*/
+  --color-modalBg: oklch(0.872 0.01 258.338); /* gray-300 */
+  --color-modalShadow: color-mix(in oklab, var(--color-gray-400) 40%, transparent);
 }
 
 .dark {
@@ -38,7 +42,9 @@ ovo je nacin definiranja custom novog tailwind-a v4 (nema tailwind.config.ts vis
   --color-buttonLetter: oklch(0.872 0.01 258.338); /* gray-300 */
   --color-inputBorder: oklch(0.373 0.034 259.733); /* gray-700 */
   --color-modalHover: oklch(0.373 0.034 259.733); /* gray-700 */
-
+  --color-background2: oklch(0.278 0.033 256.848); /* gray-800*/
+  --color-modalBg: oklch(0.373 0.034 259.733); /* gray-700 */
+  --color-modalShadow: color-mix(in oklab, var(--color-black) 30%, transparent);
 }
 
 
