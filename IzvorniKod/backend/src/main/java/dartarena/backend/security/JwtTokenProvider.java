@@ -15,7 +15,7 @@ public class JwtTokenProvider {
 
     public String generateToken(String email, Long userId) {
         long now = System.currentTimeMillis();
-        long expire = now + 1000L * 60 * 60 * 24; // 24h
+        long expire = now + 1000L * 60 * 60 * 12; // 12h
 
         return Jwts.builder()
                 .setSubject(email)                // spremaju se email i id u token

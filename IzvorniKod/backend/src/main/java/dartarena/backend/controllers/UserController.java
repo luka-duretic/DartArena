@@ -1,8 +1,6 @@
 package dartarena.backend.controllers;
 
-import dartarena.backend.dto.LoginResponseDto;
-import dartarena.backend.dto.UserLoginDto;
-import dartarena.backend.dto.UserRegisterDto;
+import dartarena.backend.dto.*;
 import dartarena.backend.exceptions.InvalidFormatException;
 import dartarena.backend.exceptions.LoginException;
 import dartarena.backend.models.User;
@@ -11,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -19,7 +20,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
+    // prijavi user-a
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody UserLoginDto user) {
         try{
@@ -30,6 +31,7 @@ public class UserController {
         }
     }
 
+    // registriraj novog user-a
     @PostMapping("/auth/register")
     public ResponseEntity<?> register(@RequestBody UserRegisterDto user) {
         try{
@@ -47,16 +49,51 @@ public class UserController {
         }
     }
 
-    @GetMapping
-    public String getUser() {
-        String response = "No users yet";
-        List<User> tmp = userService.getAllUser();
-        if(tmp.size() > 0) {
-            StringBuilder sb = new StringBuilder();
-            tmp.forEach(user -> sb.append(user + "\n"));
-            response = sb.toString();
-        }
+    // postavi sliku profila
+    @PostMapping("/update-profile-picture/{userId}")
+    public ResponseEntity<?> uploadProfilePicture(
+            @PathVariable String userId,
+            @RequestParam("image") MultipartFile imageFile) {
 
+        try {
+            Map<String, String> message = userService.updateProfilePicture(Long.parseLong(userId), imageFile);
+            return ResponseEntity.ok(message);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Failed to upload image: " + e.getMessage());
+        }
+    }
+
+    // dohvati sve user-e
+    @GetMapping("/all")
+    public List<UserResponseDto> getUsers() {
+        List<UserResponseDto> response = userService.getAllUser().stream().map(u -> new UserResponseDto(u)).toList();
         return response;
+    }
+
+    // dohvati user-a sa id
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUser(@PathVariable("id") String id) {
+        try{
+            UserResponseDto response = userService.getUser(Long.parseLong(id));
+            if(response != null)
+                return ResponseEntity.ok(response);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with id " + id + " not found");
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error accured " + e.getMessage());
+        }
+    }
+
+    // azuriraj user-a
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @RequestBody UserUpdateDto user) {
+        try{
+            UserResponseDto response = userService.updateUser(Long.parseLong(id), user);
+            return ResponseEntity.ok(response);
+
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error accured: " + e.getMessage());
+        }
     }
 }

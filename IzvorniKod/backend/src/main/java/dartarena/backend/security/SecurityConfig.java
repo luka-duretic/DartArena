@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/user/auth/**").permitAll() // putanja za registraciju, login
+                        .requestMatchers("/user/auth/**").permitAll() // putanja za registraciju, login dopustena svima
                         .anyRequest().authenticated() // ostali endpoints zahtijevaju JWT
                 )
                 .build();
