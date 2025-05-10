@@ -8,6 +8,7 @@ import { MdOutlineSsidChart } from "react-icons/md";
 import { GiDart } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import { useAuth } from "../context/AuthContext";
+import Footer from "../components/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -40,12 +41,12 @@ const SideBar = () => {
       {/* SideBar */}
       <div
         className={`flex flex-col fixed top-0 ${
-          isOpen ? "left-0" : "-left-[300px]"
-        } w-[300px] h-screen bg-background text-textColorDark transition-all duration-300 ease-in-out p-4 ${
+          isOpen ? "left-0" : "-left-[330px]"
+        } w-[330px] h-screen bg-background text-textColorDark transition-all duration-300 ease-in-out p-4 ${
           isOpen ? "shadow-md" : "shadow-none"
         } z-50`}
       >
-      {/* close gumb */} 
+        {/* close gumb */}
         <div className="flex justify-between items-center mb-[3.5rem]">
           <span className="text-xl font-semibold cursor-default">
             DartArena
@@ -84,11 +85,12 @@ const SideBar = () => {
         <div className="h-full mb-3 mt-2 flex justify-end items-end">
           <div className="flex gap-2 items-center mr-3 cursor-pointer hover:scale-105 transition duration-300">
             <div onClick={handleClick}>Sign out</div>
-            <CiLogout className="mt-[2px]"/>
+            <CiLogout className="mt-[2px]" />
           </div>
         </div>
+        <div className="h-1 bg-textColorDark mb-3 mt-1"></div>
+        <Footer />
       </div>
-
       {/* preklapanje kad je SideBar otvoren */}
       {isOpen && (
         <div

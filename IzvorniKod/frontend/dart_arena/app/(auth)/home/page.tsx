@@ -9,16 +9,25 @@ import { GiDart } from "react-icons/gi";
 import Link from "next/link";
 
 export default function Home() {
-  const { token, logout } = useAuth();
+  const { token, user, logout } = useAuth();
 
   useEffect(() => {
     if (!token) return;
   }, []);
 
+  if (!user) {
+    return (
+      <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
+        <div>Loading...</div>
+        <div className="spinner-border" role="status" />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[55%] h-full bg-yellow flex flex-col gap-3 pt-5">
+      <div className="w-[55%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
