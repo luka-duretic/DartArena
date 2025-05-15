@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -45,13 +43,6 @@ public class User {
     private Double dartsWeight;
 
     private String profileImgURL;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    // mappedBy je veza na ime atributa u SubProfile, cascade brise sve SubProfile ako se obrise user, a zadnji atribut brise SubProfile koji izgubi referencu na user roditelja
-    private Set<SubProfile> subprofiles;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private UserStatistics statistics;
 
     public User(){
         this.joinDate = LocalDateTime.now();
@@ -169,21 +160,5 @@ public class User {
 
     public void setTeam(@Size(min = 4, max = 50) String team) {
         this.team = team;
-    }
-
-    public Set<SubProfile> getSubprofiles() {
-        return subprofiles;
-    }
-
-    public void setSubprofiles(Set<SubProfile> subprofiles) {
-        this.subprofiles = subprofiles;
-    }
-
-    public UserStatistics getStatistics() {
-        return statistics;
-    }
-
-    public void setStatistics(UserStatistics statistics) {
-        this.statistics = statistics;
     }
 }

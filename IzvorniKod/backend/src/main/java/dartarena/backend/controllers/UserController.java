@@ -64,6 +64,21 @@ public class UserController {
         }
     }
 
+    // postavi sliku profila
+    @GetMapping("/search/{prefix}")
+    public ResponseEntity<?> searchUsers(@PathVariable("prefix") String search) {
+        try {
+            if(!search.isEmpty() && search != null && search.length() <= 20) {
+                List<UserResponseDto> result = userService.searchUsers(search);
+                return ResponseEntity.ok(result);
+            } else
+                throw new InvalidFormatException("Invalid search parameter: " + search);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
     // dohvati sve user-e
     @GetMapping("/all")
     public List<UserResponseDto> getUsers() {

@@ -6,7 +6,9 @@ import dartarena.backend.dto.UserUpdateDto;
 import dartarena.backend.exceptions.InvalidFormatException;
 import dartarena.backend.exceptions.LoginException;
 import dartarena.backend.models.User;
+import dartarena.backend.models.UserStatistics;
 import dartarena.backend.repository.UserRepository;
+import dartarena.backend.repository.UserStatisticsRepository;
 import dartarena.backend.security.JwtTokenProvider;
 import dartarena.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserServiceJpa implements UserService {
@@ -33,6 +32,8 @@ public class UserServiceJpa implements UserService {
     private JwtTokenProvider jwtProvider;
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private UserStatisticsRepository userStatisticsRepo;
 
     @Value("${supabase.url}")
     private String supabaseUrl;
@@ -54,6 +55,10 @@ public class UserServiceJpa implements UserService {
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         userRepo.save(user);
+
+        UserStatistics stats = new UserStatistics();
+        stats.setUser(user);
+        userStatisticsRepo.save(stats);
 
         return new LoginResponseDto(jwtProvider.generateToken(user.getEmail(), user.getId()), user);
     }
@@ -163,6 +168,17 @@ public class UserServiceJpa implements UserService {
         } else {
             throw new RuntimeException("Supabase upload failed: " + response.body());
         }
+    }
+
+    @Override
+    public List<UserResponseDto> searchUsers(String search) {
+        List<User> users = new ArrayList<>();
+        List<UserResponseDto> usersResult = new ArrayList<>();
+
+        users.addAll(userRepo.findAllByNickNameIgnoreCaseStartingWith(search));
+        users.forEach(user -> usersResult.add(new UserResponseDto(user)));
+
+        return usersResult;
     }
 
     private String getFileExtension(String filename) {

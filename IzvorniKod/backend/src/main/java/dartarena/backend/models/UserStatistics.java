@@ -20,6 +20,13 @@ public class UserStatistics {
 
     private int total170Plus;
 
+    public UserStatistics() {
+        totalMatches = 0;
+        total180 = 0;
+        total170 = 0;
+        total170Plus = 0;
+    }
+
     public Long getId() {
         return id;
     }
