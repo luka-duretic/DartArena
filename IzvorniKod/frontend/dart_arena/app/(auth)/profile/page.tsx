@@ -11,12 +11,20 @@ import ProfileDetails from "@/app/components/ProfileDetails";
 import { z } from "zod";
 import { apiCall } from "@/api";
 import { jwtDecode } from "jwt-decode";
-import { randomBytes, randomInt, randomUUID } from "crypto";
+import { User } from "@/app/context/AuthContext";
 
 interface MyJwtPayload {
   id: number;
   email: string;
   exp: number;
+}
+
+interface UserStats {
+  user: User | null;
+  total170: number;
+  total170Plus: number;
+  total180: number;
+  totalMatches: number;
 }
 
 const editSchema = z.object({
@@ -36,7 +44,7 @@ const editSchema = z.object({
   dartsName: z
     .string()
     .min(4, "Darts name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._]*$/, "Incorrect darts name format")
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect darts name format")
     .optional(),
   dartsWeight: z
     .number()
@@ -46,21 +54,28 @@ const editSchema = z.object({
   team: z
     .string()
     .min(4, "Team name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._]*$/, "Incorrect team name format")
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect team name format")
     .optional(),
   league: z
     .string()
     .min(4, "League name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._]*$/, "Incorrect league name format")
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect league name format")
     .optional(),
 });
 
 export default function ProfilePage() {
-  const { token, user, logout } = useAuth();
+  const { token, user, logout, refresh } = useAuth();
   const [change, setChange] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [submit, setSubmit] = useState(false);
   const [errors, setErrors] = useState({});
+  const [userStats, setUserStats] = useState<UserStats>({
+    user: user,
+    total170: 0,
+    total170Plus: 0,
+    total180: 0,
+    totalMatches: 0,
+  });
   const [serverError, setServerError] = useState("");
   const [formData, setFormData] = useState({
     firstName: user?.firstName,
@@ -92,7 +107,25 @@ export default function ProfilePage() {
       dartsName: user?.dartsName || "",
       dartsWeight: user?.dartsWeight || null,
     });
-  }, [user]);
+
+    if (token) {
+      let userId = jwtDecode<MyJwtPayload>(token).id;
+
+      apiCall(`/userstats/${userId}`, {
+        method: "GET",
+      })
+        .then(([data, status]) => {
+          if (status === 200) {
+            setUserStats(data);
+          } else {
+            console.log(data);
+          }
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  }, [user, token]);
 
   if (!user) {
     return (
@@ -137,6 +170,7 @@ export default function ProfilePage() {
 
     setSubmit(false);
     setSelectedFile(null);
+    refresh(jwtDecode<MyJwtPayload>(token));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,7 +186,6 @@ export default function ProfilePage() {
   };
 
   const handleSubmit = () => {
-    setChange(false);
     setServerError("");
     setErrors({});
 
@@ -198,6 +231,8 @@ export default function ProfilePage() {
         setErrors(formattedErrors);
       }
     }
+    setChange(false);
+    refresh(jwtDecode<MyJwtPayload>(token));
   };
 
   const handleUndo = () => {
@@ -237,7 +272,7 @@ export default function ProfilePage() {
                 <div className="relative">
                   {user?.profileImgURL ? (
                     <img
-                      src={user.profileImgURL}
+                      src={user?.profileImgURL}
                       alt="profile picture"
                       className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
                     />
@@ -272,14 +307,18 @@ export default function ProfilePage() {
               <div className="flex">
                 {/* left */}
                 <div className="flex flex-col justify-center items-center border-r-2 border-b-2 w-40 p-1">
-                  <div className="font-semibold text-2xl">0</div>
+                  <div className="font-semibold text-2xl">
+                    {userStats.total170Plus}
+                  </div>
                   <div className="opacity-60 text-sm font-semibold">
                     170+ score
                   </div>
                 </div>
                 {/* right */}
                 <div className="flex flex-col justify-center items-center border-b-2 border-l-2 w-40 p-1">
-                  <div className="font-semibold text-2xl">1</div>
+                  <div className="font-semibold text-2xl">
+                    {userStats.total180}
+                  </div>
                   <div className="opacity-60 text-sm font-semibold">
                     180s score
                   </div>
@@ -289,14 +328,18 @@ export default function ProfilePage() {
               <div className="flex">
                 {/* left */}
                 <div className="flex flex-col justify-center items-center border-t-2 border-r-2 w-40 p-1">
-                  <div className="font-semibold text-2xl">2</div>
+                  <div className="font-semibold text-2xl">
+                    {userStats.total170}
+                  </div>
                   <div className="opacity-60 text-sm font-semibold">
                     "Big fish" (170 finishes)
                   </div>
                 </div>
                 {/* right */}
                 <div className="flex flex-col justify-center items-center border-t-2 border-l-2 w-40 p-1">
-                  <div className="font-semibold text-2xl">3</div>
+                  <div className="font-semibold text-2xl">
+                    {userStats.totalMatches}
+                  </div>
                   <div className="opacity-60 text-sm font-semibold">
                     matches played
                   </div>

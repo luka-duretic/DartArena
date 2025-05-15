@@ -1,5 +1,8 @@
+"use client"
+
 import InfoButton from "@/app/components/InfoButton";
 import { useAuth } from "@/app/context/AuthContext";
+import Link from "next/link";
 import { useEffect } from "react";
 import { GiTargetArrows } from "react-icons/gi";
 
@@ -47,7 +50,7 @@ export default function Games() {
         </div>
         {/* ostali modali */}
         <div className="flex flex-col gap-3 w-full h-[88%]">
-          <div className="flex justify-between items-center p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startX01"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               X01
@@ -55,9 +58,9 @@ export default function Games() {
             <div className="w-[50%] flex justify-end">
               <InfoButton text={x01} />
             </div>
-          </div>
+          </Link>
 
-          <div className="flex justify-between items-center p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startCricket"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               CRICKET
@@ -65,9 +68,9 @@ export default function Games() {
             <div className="w-[50%] flex justify-end">
               <InfoButton text={cricket} />
             </div>
-          </div>
+          </Link>
 
-          <div className="flex justify-between items-center p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startShanghai"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               SHANGHAI
@@ -75,9 +78,9 @@ export default function Games() {
             <div className="w-[50%] flex justify-end">
               <InfoButton text={shanghai} />
             </div>
-          </div>
+          </Link>
 
-          <div className="flex justify-between items-center p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startSplitUp"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               SPLIT UP
@@ -85,9 +88,9 @@ export default function Games() {
             <div className="w-[50%] flex justify-end">
               <InfoButton text={splitup} />
             </div>
-          </div>
+          </Link>
 
-          <div className="flex justify-between items-center p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startCountUp"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               COUNT UP
@@ -95,7 +98,7 @@ export default function Games() {
             <div className="w-[50%] flex justify-end">
               <InfoButton text={countup} />
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

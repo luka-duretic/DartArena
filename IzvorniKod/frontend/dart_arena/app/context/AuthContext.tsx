@@ -1,10 +1,15 @@
 // KOMENTARI DA MOZES BEZ BACKENDA RADIT
 
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { jwtDecode } from "jwt-decode";
 import { apiCall } from "@/api";
-import { decode } from "punycode";
 
 interface MyJwtPayload {
   id: number;
@@ -12,7 +17,7 @@ interface MyJwtPayload {
   exp: number;
 }
 
-interface User {
+export interface User {
   firstName: string;
   lastName: string;
   nickName: string;
@@ -30,6 +35,7 @@ interface Auth {
   token: string;
   user: User | null;
   logout: () => void;
+  refresh: (arg:any) => void,
 }
 
 // sve sto stavljas u kontekst
@@ -38,6 +44,7 @@ const AuthContext = createContext<Auth>({
   token: "",
   user: null,
   logout: () => {},
+  refresh: () => {},
 });
 
 // provider nad nasim kontekstom, on provide-a komponente koje su u njemu sa podacima
@@ -52,7 +59,7 @@ export const AuthProvider = ({ children }: any) => {
     if (!newToken) {
       logout();
     } else {
-      const decoded = jwtDecode<MyJwtPayload>(newToken);      
+      const decoded = jwtDecode<MyJwtPayload>(newToken);
       const now = Date.now() / 1000;
 
       if (decoded.exp != undefined && decoded.exp < now) {
@@ -60,25 +67,28 @@ export const AuthProvider = ({ children }: any) => {
       }
       setToken(newToken);
 
-      // get user
-      apiCall(`/user/${decoded.id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(([data, status]) => {
-          if (status === 200) {
-            setUser(data);
-          } else {
-            console.log(data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      getUser(decoded);
     }
   }, []);
+
+  const getUser = (decoded : any) => {
+    apiCall(`/user/${decoded.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(([data, status]) => {
+        if (status === 200) {
+          setUser(data);
+        } else {
+          console.log(data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });      
+  };
 
   const logout = () => {
     setToken("");
@@ -87,7 +97,7 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, logout }}>
+    <AuthContext.Provider value={{ token, user, logout, refresh:getUser }}>
       {children}
     </AuthContext.Provider>
   );

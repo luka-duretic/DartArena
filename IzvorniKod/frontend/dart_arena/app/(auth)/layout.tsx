@@ -88,7 +88,7 @@ const SideBar = () => {
             <CiLogout className="mt-[2px]" />
           </div>
         </div>
-        <div className="h-1 bg-textColorDark mb-3 mt-1"></div>
+        <div className="h-[2px] bg-textColorDark mb-3 mt-1"></div>
         <Footer />
       </div>
       {/* preklapanje kad je SideBar otvoren */}

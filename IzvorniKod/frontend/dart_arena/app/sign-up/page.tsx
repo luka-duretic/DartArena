@@ -26,11 +26,11 @@ const signUpSchema = z.object({
   team: z
     .string()
     .min(4, "Team name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._]*$/, "Incorrect team name format"),
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect team name format"),
   league: z
     .string()
     .min(4, "League name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._]*$/, "Incorrect league name format"),
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect league name format"),
 });
 
 function SignUpPage() {
