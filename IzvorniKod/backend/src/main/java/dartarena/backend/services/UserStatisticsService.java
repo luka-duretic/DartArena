@@ -1,7 +1,7 @@
 package dartarena.backend.services;
 
-import dartarena.backend.models.UserStatistics;
+import dartarena.backend.dto.UserStatisticsDto;
 
 public interface UserStatisticsService {
-    UserStatistics getUserStatistics(Long id);
+    UserStatisticsDto getUserStatistics(Long id);
 }

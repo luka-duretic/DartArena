@@ -86,6 +86,16 @@ public class UserServiceJpa implements UserService {
     }
 
     @Override
+    public UserResponseDto getUserByEmail(String email) {
+        User user = userRepo.findByEmail(email);
+
+        if (user == null)
+            throw new LoginException("- User with email " + email + " not found");
+
+        return new UserResponseDto(user);
+    }
+
+    @Override
     public UserResponseDto updateUser(long id, UserUpdateDto userInfo) {
         User user = userRepo.findById(id);
         if (user == null)

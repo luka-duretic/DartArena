@@ -1,5 +1,6 @@
 package dartarena.backend.controllers;
 
+import dartarena.backend.dto.UserStatisticsDto;
 import dartarena.backend.models.UserStatistics;
 import dartarena.backend.services.UserStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class UserStatisticsController {
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserStatistics(@PathVariable String userId) {
         try{
-            UserStatistics response = userStatisticsService.getUserStatistics(Long.parseLong(userId));
+            UserStatisticsDto response = userStatisticsService.getUserStatistics(Long.parseLong(userId));
             return ResponseEntity.ok(response);
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error accured: " + e.getMessage());

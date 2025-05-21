@@ -4,6 +4,7 @@ import dartarena.backend.dto.*;
 import dartarena.backend.exceptions.InvalidFormatException;
 import dartarena.backend.exceptions.LoginException;
 import dartarena.backend.models.User;
+import dartarena.backend.security.JwtTokenProvider;
 import dartarena.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     // prijavi user-a
     @PostMapping("/auth/login")
@@ -86,11 +90,28 @@ public class UserController {
         return response;
     }
 
-    // dohvati user-a sa id
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") String id) {
+    // dohvati sve user-e
+    @GetMapping("/get/{email}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
         try{
-            UserResponseDto response = userService.getUser(Long.parseLong(id));
+            UserResponseDto response = userService.getUserByEmail(email);
+            if(response != null)
+                return ResponseEntity.ok(response);
+            else
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with email " + email + " not found");
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error accured " + e.getMessage());
+        }
+    }
+
+    // dohvati user-a sa id (izvucen iz tokena)
+    @GetMapping("/get")
+    public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
+        String newToken = token.substring(7);
+        Long id = jwtTokenProvider.getUserIdFromToken(newToken);
+
+        try{
+            UserResponseDto response = userService.getUser(id);
             if(response != null)
                 return ResponseEntity.ok(response);
             else

@@ -13,6 +13,7 @@ public interface UserService {
     LoginResponseDto registerUser(User user);
     LoginResponseDto loginUser(String email, String password);
     UserResponseDto getUser(long id);
+    UserResponseDto getUserByEmail(String email);
     UserResponseDto updateUser(long id, UserUpdateDto userInfo);
     Map<String, String> updateProfilePicture(long id, MultipartFile file) throws Exception;
     List<UserResponseDto> searchUsers(String search);

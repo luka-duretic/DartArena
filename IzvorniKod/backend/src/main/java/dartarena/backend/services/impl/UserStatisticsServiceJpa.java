@@ -1,5 +1,7 @@
 package dartarena.backend.services.impl;
 
+import dartarena.backend.dto.UserResponseDto;
+import dartarena.backend.dto.UserStatisticsDto;
 import dartarena.backend.exceptions.InvalidFormatException;
 import dartarena.backend.models.User;
 import dartarena.backend.models.UserStatistics;
@@ -17,13 +19,21 @@ public class UserStatisticsServiceJpa implements UserStatisticsService {
     private UserStatisticsRepository userStatisticsRepo;
 
     @Override
-    public UserStatistics getUserStatistics(Long id) {
+    public UserStatisticsDto getUserStatistics(Long id) {
         User user = userRepo.findById(id).orElseThrow(() -> new InvalidFormatException("User not found"));
 
+        UserResponseDto userResponseDto = new UserResponseDto(user);
         UserStatistics userStatistics = userStatisticsRepo.findByUser(user);
         if(userStatistics == null)
             new InvalidFormatException("User's stats not found");
 
-        return userStatistics;
+        UserStatisticsDto response = new UserStatisticsDto();
+        response.setUser(userResponseDto);
+        response.setTotal170(userStatistics.getTotal170());
+        response.setTotal180(userStatistics.getTotal180());
+        response.setTotal170Plus(userStatistics.getTotal170Plus());
+        response.setTotalMatches(userStatistics.getTotalMatches());
+
+        return response;
     }
 }
