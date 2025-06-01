@@ -191,6 +191,20 @@ public class UserServiceJpa implements UserService {
         return usersResult;
     }
 
+    @Override
+    public Map<String, String> validateUserPasswd(String email, String password) {
+        User user = userRepo.findByEmail(email);
+        Map<String, String> response = new HashMap<>();
+
+        if (user == null)
+            throw new LoginException("- Invalid email or password");
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new LoginException("- Invalid email or password");
+
+        response.put("message", "success");
+        return response;
+    }
+
     private String getFileExtension(String filename) {
         if (filename == null) return "";
         return filename.substring(filename.lastIndexOf('.') + 1);

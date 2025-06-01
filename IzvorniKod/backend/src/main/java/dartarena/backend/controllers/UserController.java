@@ -68,6 +68,17 @@ public class UserController {
         }
     }
 
+    // provjeri lozinku user-a, validiraj ga
+    @PostMapping("/validate")
+    public ResponseEntity<?> validateUser(@RequestBody UserLoginDto user) {
+        try{
+            Map<String, String> response = userService.validateUserPasswd(user.getEmail(), user.getPassword());
+            return ResponseEntity.ok(response);
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error accured: Invalid parameter format " + e.getMessage());
+        }
+    }
+
     // postavi sliku profila
     @GetMapping("/search/{prefix}")
     public ResponseEntity<?> searchUsers(@PathVariable("prefix") String search) {
@@ -90,7 +101,7 @@ public class UserController {
         return response;
     }
 
-    // dohvati sve user-e
+    // dohvati user-a po email-u
     @GetMapping("/get/{email}")
     public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
         try{

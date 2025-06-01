@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface SubProfileRepository extends JpaRepository<SubProfile, Long> {
     SubProfile findByNickName(String nickname);
+    SubProfile findByNickNameAndUser(String nickname, User user);
     List<SubProfile> findByUser(User user);
     void deleteById(long id);
     boolean existsById(long id);

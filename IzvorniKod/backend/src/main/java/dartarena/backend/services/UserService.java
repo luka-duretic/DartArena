@@ -17,4 +17,5 @@ public interface UserService {
     UserResponseDto updateUser(long id, UserUpdateDto userInfo);
     Map<String, String> updateProfilePicture(long id, MultipartFile file) throws Exception;
     List<UserResponseDto> searchUsers(String search);
+    Map<String, String> validateUserPasswd(String email, String password);
 }

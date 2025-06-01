@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 public class MatchParticipant {
-
     @Id @GeneratedValue
     private Long id;
 
@@ -23,7 +22,7 @@ public class MatchParticipant {
 
     private Double checkoutDartsAverage;
 
-    private Double checkoutPrecentage;
+    private Double checkoutPercentage;
 
     private int score60Plus;
 
@@ -33,11 +32,31 @@ public class MatchParticipant {
 
     private int score170;
 
+    private int score170Plus;
+
     private int score180;
 
     private int legsWon;
 
     private int setsWon;
+
+    public MatchParticipant(Double average3Darts, Double checkoutDartsAverage, Double checkoutPercentage, int legsWon, Match match, int score100Plus, int score140Plus, int score170, int score170Plus, int score180, int score60Plus, int setsWon, User user) {
+        this.average3Darts = average3Darts;
+        this.checkoutDartsAverage = checkoutDartsAverage;
+        this.checkoutPercentage = checkoutPercentage;
+        this.legsWon = legsWon;
+        this.match = match;
+        this.score100Plus = score100Plus;
+        this.score140Plus = score140Plus;
+        this.score170 = score170;
+        this.score170Plus = score170Plus;
+        this.score180 = score180;
+        this.score60Plus = score60Plus;
+        this.setsWon = setsWon;
+        this.user = user;
+    }
+
+    public MatchParticipant() {}
 
     public Double getAverage3Darts() {
         return average3Darts;
@@ -56,11 +75,11 @@ public class MatchParticipant {
     }
 
     public Double getCheckoutPrecentage() {
-        return checkoutPrecentage;
+        return checkoutPercentage;
     }
 
     public void setCheckoutPrecentage(Double checkoutPrecentage) {
-        this.checkoutPrecentage = checkoutPrecentage;
+        this.checkoutPercentage = checkoutPrecentage;
     }
 
     public Long getId() {
@@ -149,5 +168,13 @@ public class MatchParticipant {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getScore170Plus() {
+        return score170Plus;
+    }
+
+    public void setScore170Plus(int score170plus) {
+        this.score170Plus = score170plus;
     }
 }

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Match {
@@ -22,9 +22,16 @@ public class Match {
 
     @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, orphanRemoval = true)
     // mappedBy je veza na ime atributa u MatchParticipants, cascade brise sve MatchParticipants ako se obrise match, a zadnji atribut brise MatchParticipants koji izgubi referencu na match roditelja
-    private Set<MatchParticipant> matchParticipants;
+    // isto tako ovo omgucava da kada save-amo match entitet automatski se save-aju i matchParticipants svaki posebno
+    private List<MatchParticipant> matchParticipants;
 
     public Match() {
+        this.matchDate = LocalDateTime.now();
+    }
+
+    public Match(String gameMode, boolean isTraining) {
+        this.gameMode = gameMode;
+        this.isTraining = isTraining;
         this.matchDate = LocalDateTime.now();
     }
 
@@ -61,11 +68,11 @@ public class Match {
         this.matchDate = matchDate;
     }
 
-    public Set<MatchParticipant> getMatchParticipant() {
+    public List<MatchParticipant> getMatchParticipant() {
         return matchParticipants;
     }
 
-    public void setMatchParticipants(Set<MatchParticipant> matchParticipants) {
+    public void setMatchParticipants(List<MatchParticipant> matchParticipants) {
         this.matchParticipants = matchParticipants;
     }
 }
