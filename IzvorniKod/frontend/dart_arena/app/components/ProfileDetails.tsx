@@ -8,7 +8,6 @@ export default function ProfileDetails({
   handleChange,
   handleChangeNum
 }: any) {
-  console.log();
 
   return (
     <div className="h-[98%] p-4 flex gap-1 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">

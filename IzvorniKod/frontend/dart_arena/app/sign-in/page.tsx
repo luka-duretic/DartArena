@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Slider from "../components/Slider";
-import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 import SignInModal from "../components/SignInModal";
 

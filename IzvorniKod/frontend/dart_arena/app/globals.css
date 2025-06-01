@@ -47,6 +47,43 @@ ovo je nacin definiranja custom novog tailwind-a v4 (nema tailwind.config.ts vis
   --color-modalShadow: color-mix(in oklab, var(--color-black) 30%, transparent);
 }
 
+@keyframes zoom-in-bounce {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.zoom-in-bounce {
+  animation: zoom-in-bounce 0.6s ease-out forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* iskljucen password-eye od defaultnih browsera */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none;
+}
+
 
 /* mode switch button css */
 .checkbox {

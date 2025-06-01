@@ -18,9 +18,14 @@ interface MyJwtPayload {
   exp: number;
 }
 
-export default function GameStart({ userInfo, formData, handleChange }: any) {
+export default function GameStart({
+  userInfo,
+  formData,
+  handleChange,
+  handleSettings,
+}: any) {
   const { token } = useAuth();
-  const [opponent, setOponent] = useState(""); //DOVRSI
+  const [opponent, setOponent] = useState({ name: "", profileImg: "" });
   const [newSubprofile, setNewSubprofile] = useState("");
   const [open, setOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
@@ -154,7 +159,7 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
               : " justify-around")
           }
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col justify-center items-center gap-2">
             {userInfo?.profileImgURL ? (
               <img
                 src={userInfo?.profileImgURL}
@@ -174,15 +179,25 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
             </span>
           )}
           {formData.mode === "duel" &&
-            (opponent !== "" ? (
-              <div className="relative flex flex-col gap">
-                <IoMdRemoveCircle
-                  className="absolute top-[10%] left-[75%] h-4 w-4 text-red-500 hover:scale-115 transition duration-300"
-                  onClick={() => setOponent("")}
-                />
-                <HiUserCircle className="h-17 w-17 text-indigo-500 rounded-full" />
+            (opponent.name !== "" ? (
+              <div className="flex flex-col justify-center items-center">
+                <div className="relative">
+                  <IoMdRemoveCircle
+                    className="absolute top-[10%] left-[75%] h-4 w-4 text-red-500 hover:scale-115 transition duration-300"
+                    onClick={() => setOponent({ name: "", profileImg: "" })}
+                  />
+                  {opponent?.profileImg ? (
+                    <img
+                      src={opponent?.profileImg}
+                      alt="profile picture"
+                      className="object-cover h-17 w-17 border-2 border-indigo-600 rounded-full p-0 m-0"
+                    />
+                  ) : (
+                    <HiUserCircle className="h-17 w-17 text-indigo-500 rounded-full" />
+                  )}
+                </div>
                 <span className="flex justify-center font-medium text-textColorDark text-lg">
-                  {opponent}
+                  {opponent.name}
                 </span>
               </div>
             ) : (
@@ -217,7 +232,7 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
                 name="nickName"
                 onChange={searchUser}
                 onFocus={() => setOpenList(true)}
-                onBlur={() => setTimeout(() => setOpenList(false), 150)}
+                onBlur={() => setTimeout(() => setOpenList(false), 500)}
                 placeholder="Enter user's nickname 🔎"
                 className={
                   "bg-inputBg py-2 px-3 w-full text-sm xs:text-base rounded-md border-[1.5px] border-background2/20 outline-indigo-500"
@@ -234,11 +249,12 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
                   )}
                   {opponentList.map((op: any) => (
                     <div
-                      key={op.id}
+                      key={op.joinDate}
                       className="p-2 text-textColorDark/50 rounded-lg flex gap-3 items-center hover:bg-background/70"
                       onClick={() => {
-                        setOponent(op.nickName);
+                        setOponent({name: op.nickName, profileImg: op?.profileImgURL});
                         setOpen(false);
+                        handleSettings({ players: [userInfo.email, op.email] });
                       }}
                     >
                       {op?.profileImgURL ? (
@@ -250,7 +266,9 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
                       ) : (
                         <FaRegUser className="p-1 h-10 w-10 text-indigo-500 border-2 border-indigo-500 rounded-full" />
                       )}
-                      <span className="text-textColorDark">{op.nickName}</span>
+                      <span key={op.id + "1"} className="text-textColorDark">
+                        {op.nickName}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -265,19 +283,24 @@ export default function GameStart({ userInfo, formData, handleChange }: any) {
                 {subprofileList.map((op: any) => (
                   <div
                     key={op.id}
-                    className="relative flex flex-col items-center hover:scale-[107%] transition duration-300"
+                    className="flex flex-col items-center hover:scale-[107%] transition duration-300"
                   >
-                    <IoMdRemoveCircle
-                      className="absolute top-[10%] left-[75%] h-4 w-4 text-red-500 hover:scale-115 transition duration-300"
-                      onClick={() => deleteSubprofile(op.id)}
-                    />
-                    <HiUserCircle
-                      className="h-17 w-17 text-textColorDark cursor-pointer"
-                      onClick={() => {
-                        setOponent(op.nickName);
-                        setOpen(false);
-                      }}
-                    />
+                    <div className="relative">
+                      <IoMdRemoveCircle
+                        className="absolute top-[10%] left-[75%] h-4 w-4 text-red-500 hover:scale-115 transition duration-300"
+                        onClick={() => deleteSubprofile(op.id)}
+                      />
+                      <HiUserCircle
+                        className="h-17 w-17 text-textColorDark cursor-pointer"
+                        onClick={() => {
+                          setOponent({name: op.nickName, profileImg: ""});
+                          setOpen(false);
+                          handleSettings({
+                            players: [userInfo.email, op.nickName],
+                          });
+                        }}
+                      />
+                    </div>
                     <span className="text-textColorDark font-medium">
                       {op.nickName}
                     </span>

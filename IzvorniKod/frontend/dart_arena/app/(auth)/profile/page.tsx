@@ -11,7 +11,7 @@ import ProfileDetails from "@/app/components/ProfileDetails";
 import { z } from "zod";
 import { apiCall } from "@/api";
 import { jwtDecode } from "jwt-decode";
-import { User } from "@/app/context/AuthContext";
+import { useGetUser, User } from "@/app/queries/getUserQuery";
 
 interface MyJwtPayload {
   id: number;
@@ -64,13 +64,14 @@ const editSchema = z.object({
 });
 
 export default function ProfilePage() {
-  const { token, user, logout, refresh } = useAuth();
+  const { token, logout } = useAuth();
+  const userQuery = useGetUser();
   const [change, setChange] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [submit, setSubmit] = useState(false);
   const [errors, setErrors] = useState({});
   const [userStats, setUserStats] = useState<UserStats>({
-    user: user,
+    user: userQuery.data,
     total170: 0,
     total170Plus: 0,
     total180: 0,
@@ -78,34 +79,34 @@ export default function ProfilePage() {
   });
   const [serverError, setServerError] = useState("");
   const [formData, setFormData] = useState({
-    firstName: user?.firstName,
-    lastName: user?.lastName,
-    nickName: user?.nickName,
-    email: user?.email || "",
-    team: user?.team || "",
-    league: user?.league || "",
-    dartsName: user?.dartsName || "",
-    dartsWeight: user?.dartsWeight || null,
+    firstName: userQuery.data?.firstName,
+    lastName: userQuery.data?.lastName,
+    nickName: userQuery.data?.nickName,
+    email: userQuery.data?.email || "",
+    team: userQuery.data?.team || "",
+    league: userQuery.data?.league || "",
+    dartsName: userQuery.data?.dartsName || "",
+    dartsWeight: userQuery.data?.dartsWeight || null,
   });
 
   const countries = useMemo(() => countryList().getData(), []);
-  const myCountry = countries.find((f) => f.label === user?.country);
+  const myCountry = countries.find((f) => f.label === userQuery.data?.country);
   const flagUrl = `https://flagcdn.com/w40/${myCountry?.value.toLowerCase()}.png`;
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) return;    
   }, []);
 
   useEffect(() => {
     setFormData({
-      firstName: user?.firstName || "",
-      lastName: user?.lastName || "",
-      nickName: user?.nickName || "",
-      email: user?.email || "",
-      team: user?.team || "",
-      league: user?.league || "",
-      dartsName: user?.dartsName || "",
-      dartsWeight: user?.dartsWeight || null,
+      firstName: userQuery.data?.firstName || "",
+      lastName: userQuery.data?.lastName || "",
+      nickName: userQuery.data?.nickName || "",
+      email: userQuery.data?.email || "",
+      team: userQuery.data?.team || "",
+      league: userQuery.data?.league || "",
+      dartsName: userQuery.data?.dartsName || "",
+      dartsWeight: userQuery.data?.dartsWeight || null,
     });
 
     if (token) {
@@ -125,9 +126,9 @@ export default function ProfilePage() {
           console.log(error.message);
         });
     }
-  }, [user, token]);
+  }, [userQuery.data, token]);
 
-  if (!user) {
+  if (userQuery.isLoading && !token) {
     return (
       <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
         <div>Loading...</div>
@@ -144,7 +145,7 @@ export default function ProfilePage() {
     }
   };
 
-  const submitImage = () => {
+  const submitImage = () => {    
     let userId = jwtDecode<MyJwtPayload>(token).id;
 
     const formDataFile = new FormData();
@@ -160,6 +161,7 @@ export default function ProfilePage() {
       .then(([data, status]) => {
         if (status === 200) {
           console.log(data);
+          userQuery.refetch();
         } else {
           console.log(data);
         }
@@ -170,7 +172,6 @@ export default function ProfilePage() {
 
     setSubmit(false);
     setSelectedFile(null);
-    refresh(jwtDecode<MyJwtPayload>(token));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -214,6 +215,8 @@ export default function ProfilePage() {
         .then(([data, status]) => {
           if (status === 200) {
             console.log(data);
+            setChange(false);
+            userQuery.refetch();
           } else {
             console.log(data);
             setServerError(data);
@@ -231,20 +234,18 @@ export default function ProfilePage() {
         setErrors(formattedErrors);
       }
     }
-    setChange(false);
-    refresh(jwtDecode<MyJwtPayload>(token));
   };
 
   const handleUndo = () => {
     setFormData({
-      firstName: user?.firstName || "",
-      lastName: user?.lastName || "",
-      nickName: user?.nickName || "",
-      email: user?.email || "",
-      team: user?.team || "",
-      league: user?.league || "",
-      dartsName: user?.dartsName || "",
-      dartsWeight: user?.dartsWeight || null,
+      firstName: userQuery.data?.firstName || "",
+      lastName: userQuery.data?.lastName || "",
+      nickName: userQuery.data?.nickName || "",
+      email: userQuery.data?.email || "",
+      team: userQuery.data?.team || "",
+      league: userQuery.data?.league || "",
+      dartsName: userQuery.data?.dartsName || "",
+      dartsWeight: userQuery.data?.dartsWeight || null,
     });
     setChange(false);
   };
@@ -257,7 +258,7 @@ export default function ProfilePage() {
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
             className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
-            style={{ backgroundImage: "url('./images/bg1.png')" }}
+            style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <img src="/images/logo.png" alt="logo" className="w-50 h-full" />
           </div>
@@ -270,9 +271,9 @@ export default function ProfilePage() {
             <div className="flex flex-col justify-between p-4">
               <div className="flex gap-5 justify-center items-center">
                 <div className="relative">
-                  {user?.profileImgURL ? (
+                  {userQuery.data?.profileImgURL ? (
                     <img
-                      src={user?.profileImgURL}
+                      src={userQuery.data?.profileImgURL}
                       alt="profile picture"
                       className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
                     />
@@ -294,10 +295,12 @@ export default function ProfilePage() {
                     onChange={handleImageUpload}
                   />
                 </div>
-                <span className="font-semibold text-2xl">{user?.nickName}</span>
+                <span className="font-semibold text-2xl">
+                  {userQuery.data?.nickName}
+                </span>
               </div>
               <div className="opacity-50 flex gap-3 items-center justify-center">
-                <i>Date joined: {user?.joinDate.split("T")[0]}</i>
+                <i>Date joined: {userQuery.data?.joinDate.split("T")[0]}</i>
                 <img src={flagUrl} alt="flag" className="h-4 w-7 mt-1"></img>
               </div>
             </div>
@@ -350,7 +353,7 @@ export default function ProfilePage() {
           {/* profile data */}
           <div className="relative h-[75%] w-full">
             <ProfileDetails
-              user={user}
+              user={userQuery.data}
               data={formData}
               errors={errors}
               serverError={serverError}

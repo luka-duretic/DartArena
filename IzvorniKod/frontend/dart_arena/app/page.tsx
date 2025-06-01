@@ -8,6 +8,10 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [mobile, setMobile] = useState(false);
 
+  useEffect(() => {    
+    localStorage.setItem("mode", "light");
+  });
+
   useEffect(() => {
     // provjeri sirinu prozora nakon mountanja komponente
     const checkMobile = () => setMobile(window.innerWidth < 450);
@@ -36,7 +40,7 @@ export default function Home() {
       {mobile ? (
         <div
           className="min-h-screen max-w-screen bg-cover flex flex-col items-start"
-          style={{ backgroundImage: "url('./images/bg1.png')" }}
+          style={{ backgroundImage: "url('../images/bg1.png')" }}
         >
           {/* gornji dio */}
           <div className="flex h-[35vh] w-full justify-center items-start pt-10">

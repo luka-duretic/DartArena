@@ -4,9 +4,11 @@ import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import GameStart from "@/app/components/GameStart";
+import { useGetUser } from "@/app/queries/getUserQuery";
 
 export default function StartCricketPage() {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
+  const userQuery = useGetUser()
   const [formData, setFormData] = useState({
     legs: 1,
     sets: 1,
@@ -18,7 +20,7 @@ export default function StartCricketPage() {
     if (!token) return;
   }, []);
 
-  if (!user) {
+  if (userQuery.isLoading) {
     return (
       <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
         <div>Loading...</div>
@@ -56,7 +58,7 @@ export default function StartCricketPage() {
         {/* ostali modali */}
         <div className="flex flex-col gap-3 w-full h-[88%]">
           <GameStart
-            userInfo={user}
+            userInfo={userQuery.data}
             formData={formData}
             handleChange={handleChange}
           />

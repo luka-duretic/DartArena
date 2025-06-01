@@ -7,15 +7,17 @@ import { TbTargetArrow } from "react-icons/tb";
 import { MdOutlineSsidChart } from "react-icons/md";
 import { GiDart } from "react-icons/gi";
 import Link from "next/link";
+import { useGetUser } from "@/app/queries/getUserQuery";
 
 export default function Home() {
-  const { token, user, logout } = useAuth();
+  const { token, logout } = useAuth();
+  const userQuery = useGetUser();
 
   useEffect(() => {
     if (!token) return;
   }, []);
 
-  if (!user) {
+  if (userQuery.isLoading) {
     return (
       <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
         <div>Loading...</div>
@@ -32,7 +34,7 @@ export default function Home() {
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
             className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
-            style={{ backgroundImage: "url('./images/bg1.png')" }}
+            style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <img src="/images/logo.png" alt="logo" className="w-50 h-full" />
           </div>

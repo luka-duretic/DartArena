@@ -2,18 +2,20 @@
 
 import InfoButton from "@/app/components/InfoButton";
 import { useAuth } from "@/app/context/AuthContext";
+import { useGetUser } from "@/app/queries/getUserQuery";
 import Link from "next/link";
 import { useEffect } from "react";
 import { GiTargetArrows } from "react-icons/gi";
 
 export default function Games() {
-  const { token, user, logout } = useAuth();
+  const { token, logout } = useAuth();
+  const userQuery = useGetUser()
 
   useEffect(() => {
     if (!token) return;
   }, []);
 
-  if (!user) {
+  if (userQuery.isLoading) {
     return (
       <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
         <div>Loading...</div>
@@ -41,7 +43,7 @@ export default function Games() {
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
             className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
-            style={{ backgroundImage: "url('./images/bg1.png')" }}
+            style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <span className="m-8 font-semibold text-white text-2xl">
               START NEW GAME
@@ -55,7 +57,7 @@ export default function Games() {
               <GiTargetArrows />
               X01
             </div>
-            <div className="w-[50%] flex justify-end">
+            <div className="w-10 flex justify-end">
               <InfoButton text={x01} />
             </div>
           </Link>
@@ -65,7 +67,7 @@ export default function Games() {
               <GiTargetArrows />
               CRICKET
             </div>
-            <div className="w-[50%] flex justify-end">
+            <div className="w-10 flex justify-end">
               <InfoButton text={cricket} />
             </div>
           </Link>
@@ -75,7 +77,7 @@ export default function Games() {
               <GiTargetArrows />
               SHANGHAI
             </div>
-            <div className="w-[50%] flex justify-end">
+            <div className="w-10 flex justify-end">
               <InfoButton text={shanghai} />
             </div>
           </Link>
@@ -85,7 +87,7 @@ export default function Games() {
               <GiTargetArrows />
               SPLIT UP
             </div>
-            <div className="w-[50%] flex justify-end">
+            <div className="w-10 flex justify-end">
               <InfoButton text={splitup} />
             </div>
           </Link>
@@ -95,7 +97,7 @@ export default function Games() {
               <GiTargetArrows />
               COUNT UP
             </div>
-            <div className="w-[50%] flex justify-end">
+            <div className="flex w-10 justify-end">
               <InfoButton text={countup} />
             </div>
           </Link>

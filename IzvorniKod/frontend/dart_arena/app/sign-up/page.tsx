@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { z } from "zod";
 import CountryInput from "../components/CountryInput";
 import { apiCall } from "@/api";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const signUpSchema = z.object({
   firstName: z
@@ -34,6 +35,7 @@ const signUpSchema = z.object({
 });
 
 function SignUpPage() {
+  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -241,30 +243,43 @@ function SignUpPage() {
                   </div>
                 )}
 
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                  className={
-                    "bg-inputBg py-2 px-3 w-full text-sm xs:text-base rounded-md mt-3 border-[1.5px] border-inputBorder " +
-                    (errors.password
-                      ? "border-[1.5px] border-red-500 outline-red-500"
-                      : "outline-indigo-500")
-                  }
-                  maxLength={20}
-                  required
-                />
-                {errors.password ? (
-                  <div className="text-red-700 text-xs md:text-sm ml-1 mt-[2px] xs:mt-[-2px]">
-                    {errors.password}
-                  </div>
-                ) : (
-                  <div className="text-xs md:text-sm opacity-40 ml-1 mt-[2px] xs:mt-[-2px]">
-                    (e.g. iamboss123, ASJfdac*+As...)
-                  </div>
-                )}
+                <div className="relative">
+                  <input
+                    type={show ? "text" : "password"}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className={
+                      "bg-inputBg py-2 px-3 w-full text-sm xs:text-base rounded-md mt-3 border-[1.5px] border-inputBorder " +
+                      (errors.password
+                        ? "border-[1.5px] border-red-500 outline-red-500"
+                        : "outline-indigo-500")
+                    }
+                    maxLength={20}
+                    required
+                  />
+                  {show ? (
+                    <FiEyeOff
+                      className="absolute w-[18px] h-[18px] top-[25px] right-3 cursor-pointer"
+                      onClick={() => setShow(!show)}
+                    />
+                  ) : (
+                    <FiEye
+                      className="absolute w-[18px] h-[18px] top-[25px] right-3 cursor-pointer"
+                      onClick={() => setShow(!show)}
+                    />
+                  )}
+                  {errors.password ? (
+                    <div className="text-red-700 text-xs md:text-sm ml-1 mt-[2px] xs:mt-[-2px]">
+                      {errors.password}
+                    </div>
+                  ) : (
+                    <div className="text-xs md:text-sm opacity-40 ml-1 mt-[2px] xs:mt-[-2px]">
+                      (e.g. iamboss123, ASJfdac*+As...)
+                    </div>
+                  )}
+                </div>
 
                 <input
                   type="text"

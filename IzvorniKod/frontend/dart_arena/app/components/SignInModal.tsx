@@ -88,12 +88,12 @@ export default function SignInModal() {
               />
               {show ? (
                 <FiEyeOff
-                  className="absolute top-6 right-2 cursor-pointer"
+                  className="absolute w-[18px] h-[18px] top-[26px] right-3 cursor-pointer"
                   onClick={() => setShow(!show)}
                 />
               ) : (
                 <FiEye
-                  className="absolute top-6 right-2 cursor-pointer"
+                  className="absolute w-[18px] h-[18px] top-[26px] right-3 cursor-pointer"
                   onClick={() => setShow(!show)}
                 />
               )}
