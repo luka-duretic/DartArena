@@ -44,7 +44,7 @@ export default function MatchSummary({
             ) : (
               <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 rounded-full" />
             )}
-            <p>{player1.name.toUpperCase()}</p>
+            <p className="break-all">{player1.name.toUpperCase()}</p>
           </div>
           {player2.name !== "" && (
             <div className="font-bold flex justify-center items-center w-[20%]">
@@ -62,7 +62,7 @@ export default function MatchSummary({
               ) : (
                 <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 p-0 rounded-full" />
               )}
-              <p>{player2.name.toUpperCase()}</p>
+              <p className="break-all">{player2.name.toUpperCase()}</p>
             </div>
           )}
         </div>

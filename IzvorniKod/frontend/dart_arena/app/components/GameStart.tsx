@@ -212,7 +212,7 @@ export default function GameStart({
       </div>
       {open && (
         <div className="fixed inset-0 z-30 bg-black/40 flex justify-center items-center">
-          <div className="h-[21rem] w-[45%] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
+          <div className="zoom-in-bounce h-[21rem] w-[45%] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
             <div className="flex justify-between items-center w-full">
               <div></div>
               <span className="text-textColorDark text-lg font-semibold">

@@ -42,15 +42,6 @@ export default function StartX01Page() {
     setFormData({ ...formData, ["players"]: [userQuery.data?.email] });
   }, [userQuery.data?.email]);
 
-  if (userQuery.isLoading) {
-    return (
-      <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
-        <div>Loading...</div>
-        <div className="spinner-border" role="status" />
-      </div>
-    );
-  }
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -83,6 +74,15 @@ export default function StartX01Page() {
       router.push("/games/X01");
     }
   };
+
+  if (userQuery.isLoading) {
+    return (
+      <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
+        <div>Loading...</div>
+        <div className="spinner-border" role="status" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">

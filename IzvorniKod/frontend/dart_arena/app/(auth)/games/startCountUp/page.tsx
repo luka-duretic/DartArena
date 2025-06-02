@@ -1,26 +1,76 @@
 "use client";
 
+import InfoButton2 from "@/app/components/InfoButton2";
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import GameStart from "@/app/components/GameStart";
 import { useGetUser } from "@/app/queries/getUserQuery";
+import { useGameSettings } from "@/app/settings/GameSettings";
+import { useRouter } from "next/navigation";
 
 export default function StartCountUpPage() {
   const { token } = useAuth();
-  const userQuery = useGetUser()
+  const userQuery = useGetUser();
   const [formData, setFormData] = useState({
     legs: 1,
     sets: 1,
     points: 180,
     mode: "training",
+    players: [userQuery.data?.email],
+    startPlayerNum: 1,
   });
   const points = [180, 301, 501, 701, 901, 1001];
   const leg_set_number = Array.from({ length: 35 }, (_, i) => i + 1);
+  const setSettings = useGameSettings((state) => state.setSettings);
+  const router = useRouter();
 
   useEffect(() => {
+    localStorage.removeItem("history");
+    localStorage.removeItem("game-settings");
+    localStorage.removeItem("end");
+    localStorage.removeItem("match");
+    localStorage.removeItem("validate");
     if (!token) return;
   }, []);
+
+  useEffect(() => {
+    setFormData({ ...formData, ["players"]: [userQuery.data?.email] });
+  }, [userQuery.data?.email]);
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSettings = (e: any) => {
+    setFormData({ ...formData, ["players"]: e.players });
+  };
+
+  const handleStart = (e: any) => {
+    e.preventDefault();
+    console.log(formData);
+
+    if (formData.players.length !== 2 && formData.mode === "duel") {
+      alert("Select your opponent");
+    } else {
+      alert("Begin your match");
+
+      setSettings({
+        players:
+          formData.players.length === 1
+            ? [...formData.players, ""]
+            : formData.players,
+        mode: formData.mode,
+        points: formData.points,
+        legs: formData.legs,
+        sets: formData.sets,
+        startPlayerNum: formData.startPlayerNum,
+      });
+
+      router.push("/games/CountUp");
+    }
+  };
 
   if (userQuery.isLoading) {
     return (
@@ -31,21 +81,10 @@ export default function StartCountUpPage() {
     );
   }
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // DOVRSI
-  const handleSubmit = () => {
-    console.log(formData);
-    alert("Success");
-  };
-
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[50%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
@@ -63,6 +102,7 @@ export default function StartCountUpPage() {
             userInfo={userQuery.data}
             formData={formData}
             handleChange={handleChange}
+            handleSettings={handleSettings}
           />
           <div className="flex flex-col gap-4 justify-between items-center p-5 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="flex gap-2 items-center w-full">
@@ -74,15 +114,19 @@ export default function StartCountUpPage() {
               </span>
             </div>
             {/* legs/sets odabir */}
-            <div className="flex gap-2 justify-around items-center mt-2 w-[82%]">
-              <div className="flex">
-                <div className="bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-35">
+            <div className="flex gap-3 justify-center items-center mt-2 w-[82%]">
+              <div className="flex w-full">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
                   Number of legs
+                </div>
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  Legs
                 </div>
                 <select
                   name="legs"
                   className="form-select bg-textColorDark/55 rounded-tr-lg rounded-br-lg text-white p-2 w-15 border-[1px] border-textColorDark/55"
                   onChange={handleChange}
+                  required
                 >
                   {leg_set_number.map((i) => (
                     <option key={i} className="p-2">
@@ -91,14 +135,18 @@ export default function StartCountUpPage() {
                   ))}
                 </select>
               </div>
-              <div className="flex">
-                <div className="bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-35">
+              <div className="flex w-full">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
                   Number of sets
+                </div>
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  Sets
                 </div>
                 <select
                   name="sets"
                   className="form-select bg-textColorDark/55 rounded-tr-lg rounded-br-lg text-white p-2 w-15 border-[1px] border-textColorDark/55"
                   onChange={handleChange}
+                  required
                 >
                   {leg_set_number.map((i) => (
                     <option key={i} className="p-2 w-50">
@@ -107,14 +155,18 @@ export default function StartCountUpPage() {
                   ))}
                 </select>
               </div>
-              <div className="flex">
-                <div className="bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-30">
-                  Leg Points
+              <div className="flex w-full">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  X01 points
+                </div>
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  X01
                 </div>
                 <select
                   name="points"
                   className="form-select bg-textColorDark/55 rounded-tr-lg rounded-br-lg text-white p-2 w-18 border-[1px] border-textColorDark/55"
                   onChange={handleChange}
+                  required
                 >
                   {points.map((i) => (
                     <option key={i} className="p-2">
@@ -124,10 +176,46 @@ export default function StartCountUpPage() {
                 </select>
               </div>
             </div>
+            <form
+              id="myForm"
+              onSubmit={handleStart}
+              className="flex flex-col gap-4 w-full"
+            >
+              {!(formData.mode === "training") && (
+                <div className="relative flex justify-center items-center gap-3">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                    <input
+                      type="radio"
+                      className="opacity-0 absolute"
+                      onChange={handleChange}
+                      name="startPlayerNum"
+                      value={1}
+                      required
+                    />
+                    Player1
+                  </label>
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                    <input
+                      type="radio"
+                      className="opacity-0 absolute"
+                      onChange={handleChange}
+                      name="startPlayerNum"
+                      value={2}
+                      required
+                    />
+                    Player 2
+                  </label>
+                  <div className="w-10 absolute top-[18%] right-[0%]">
+                    <InfoButton2 text={"Select who starts first."} />
+                  </div>
+                </div>
+              )}
+            </form>
           </div>
           <button
+            type="submit"
+            form="myForm"
             className="font-semibold text-xl text-white bg-teal-500 hover:bg-teal-600 ease-in-out rounded-lg shadow-lg shadow-modalShadow p-[10px] cursor-pointer hover:scale-[102.5%] transition duration-300"
-            onClick={handleSubmit}
           >
             START GAME
           </button>

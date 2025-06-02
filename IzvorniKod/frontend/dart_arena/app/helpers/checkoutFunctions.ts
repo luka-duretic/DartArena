@@ -13,12 +13,12 @@ export function calculatecheckoutDartsAverage(latest:any){
 }
 
 // funkcija za racunanje postotka pobijedenih legova
-export function calculateCheckoutPercentage(history:any, gameSettings:any, latest:any){
+export function calculateCheckoutPercentage(history:any, gameSettings:any, latest:any, startScore:any){
     const totalLegsPlayed =
     history.filter(
       (h:any) =>
-        h.playerFirst.score === gameSettings.points &&
-        h.playerSecond.score === gameSettings.points
+        h.playerFirst.score === startScore &&
+        h.playerSecond.score === startScore
     ).length - 1;
     
     const firstWon = latest.playerFirst.dartsUsedPerLeg.filter((d:any) => d[1] === true).length;

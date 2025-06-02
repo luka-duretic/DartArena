@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GrUndo } from "react-icons/gr";
 
-export default function X01() {
+export default function CountUp() {
   const [gameSettings, setGameSettings] = useState(initialGameSettings);
   const [player1, setPlayer1] = useState(initialPlayer);
   const [player2, setPlayer2] = useState(initialPlayer);
@@ -43,9 +43,6 @@ export default function X01() {
     "178",
     "179",
   ];
-  const DO_forbiden = ["162", "165", "168", "159"];
-  const DI_forbiden = ["1"];
-  const MI_forbiden = ["1", "2"];
   const [validate, setValidate] = useState(false);
   const [passwdErr, setPasswdErr] = useState("");
   const [passwd, setPasswd] = useState("");
@@ -65,7 +62,7 @@ export default function X01() {
       if (matchLocStor) setFormdata(JSON.parse(matchLocStor));
 
       if (localStorage.length < 3) {
-        router.push("/games/startX01");
+        router.push("/games/startCountUp");
       }
 
       let hist: Pair[] = [];
@@ -86,7 +83,7 @@ export default function X01() {
           ["name"]: historyLast?.playerFirst.name || userQuery.data.nickName,
           ["imgUrl"]:
             historyLast?.playerFirst.imgUrl || userQuery.data.profileImgURL,
-          ["score"]: historyLast?.playerFirst.score || settingsJSON.points,
+          ["score"]: historyLast?.playerFirst.score || 0,
           ["threeDartAverage"]:
             historyLast?.playerFirst.threeDartAverage || 0.0,
           ["dartsUsed"]: historyLast?.playerFirst.dartsUsed || 0,
@@ -120,7 +117,7 @@ export default function X01() {
               ["name"]: historyLast?.playerSecond.name || data.nickName,
               ["imgUrl"]:
                 historyLast?.playerSecond.imgUrl || data.profileImgURL,
-              ["score"]: historyLast?.playerSecond.score || settingsJSON.points,
+              ["score"]: historyLast?.playerSecond.score || 0,
               ["threeDartAverage"]:
                 historyLast?.playerSecond.threeDartAverage || 0.0,
               ["dartsUsed"]: historyLast?.playerSecond.dartsUsed || 0,
@@ -148,7 +145,7 @@ export default function X01() {
           newPlayer2 = {
             ...player2,
             ["name"]: historyLast?.playerSecond.name || settingsJSON.players[1],
-            ["score"]: historyLast?.playerSecond.score || settingsJSON.points,
+            ["score"]: historyLast?.playerSecond.score || 0,
             ["threeDartAverage"]:
               historyLast?.playerSecond.threeDartAverage || 0.0,
             ["dartsUsed"]: historyLast?.playerSecond.dartsUsed || 0,
@@ -179,7 +176,6 @@ export default function X01() {
 
   useEffect(() => {
     const historyLast = history[history.length - 1];
-
     if (!historyLast) return;
 
     setPlayer1(setPlayers(historyLast?.playerFirst, player1));
@@ -190,46 +186,14 @@ export default function X01() {
   // samo zalijepi broj na to ako nije ukupno vece od 180
   const handleInput = (number: any) => {
     if (userInput === "0") {
-      const isDoubleIn = gameSettings.legStart === "Double in";
-      const isMasterIn = gameSettings.legStart === "Master in";
-
-      if (isDoubleIn && DI_forbiden.includes(number+"")) return;
-      if (isMasterIn && MI_forbiden.includes(number+"")) return;
       setUserInput(number + "");
     } else {
       if (Number(userInput + number) < 181) {
         const totalInput = userInput + number;
-        const totalInputNum = Number(totalInput);
-        const isSingleOut = gameSettings.legFinish === "Single out";
-        const isDoubleOut = gameSettings.legFinish === "Double out";
         const isNotForbiddenPoints = !points_forbidden.includes(totalInput);
-        const isNotForbiddenDoubleOut = !DO_forbiden.includes(totalInput);
 
         if (!isNotForbiddenPoints) return;
-        if (player1.onTurn) {
-          const remainingScore = Number(player1.score) - totalInputNum;
-          const isNotOneLeft = remainingScore !== 1;
-          const isExactFinish = remainingScore === 0;
-
-          if (totalInputNum > Number(player1.score)) return;
-          if (!isSingleOut && !isNotOneLeft) return;
-          if (isDoubleOut) {
-            if (isExactFinish && !isNotForbiddenDoubleOut) return;
-          }
-          setUserInput(userInput + "" + number);
-        }
-        if (player2.onTurn) {
-          const remainingScore = Number(player2.score) - totalInputNum;
-          const isNotOneLeft = remainingScore !== 1;
-          const isExactFinish = remainingScore === 0;
-
-          if (totalInputNum > Number(player2.score)) return;
-          if (!isSingleOut && !isNotOneLeft) return;
-          if (isDoubleOut) {
-            if (isExactFinish && !isNotForbiddenDoubleOut) return;
-          }
-          setUserInput(userInput + "" + number);
-        }
+        setUserInput(userInput + "" + number);
       }
     }
   };
@@ -239,12 +203,12 @@ export default function X01() {
     const legCount =
       history.filter(
         (h) =>
-          h.playerFirst.score === gameSettings.points &&
-          h.playerSecond.score === gameSettings.points
+          h.playerFirst.score === 0 &&
+          h.playerSecond.score === 0
       ).length - 1; // zbog prvog zapisa history-a
 
     if (player1.onTurn && player2.name !== "") {
-      const newValue = player1.score - Number(userInput);
+      const newValue = player1.score + Number(userInput);
       let totalDarts = 0;
       player1.dartsUsedPerLeg.forEach((d) => (totalDarts += d[0]));
       newHistory = [
@@ -252,9 +216,9 @@ export default function X01() {
         {
           playerFirst: {
             ...player1,
-            score: newValue === 0 ? gameSettings.points : newValue,
+            score: newValue >= gameSettings.points ? 0 : newValue,
             onTurn:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? ((legCount + 1) % 2 === 1 &&
                     gameSettings.startPlayerNum == 1) ||
                   ((legCount + 1) % 2 === 0 && gameSettings.startPlayerNum == 2)
@@ -267,19 +231,19 @@ export default function X01() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue === 0 ? 0 : player1.dartsUsed + 3,
+            dartsUsed: newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
             legsWon:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? player1.legsWon + 1 == gameSettings.legs
                   ? 0
                   : player1.legsWon + 1
                 : player1.legsWon,
             setsWon:
-              newValue === 0 && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
                 ? player1.setsWon + 1
                 : player1.setsWon,
             dartsUsedPerLeg:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? [
                     ...player1.dartsUsedPerLeg,
                     [player1.dartsUsed + 3, true] as [number, boolean],
@@ -313,24 +277,24 @@ export default function X01() {
           playerSecond: {
             ...player2,
             onTurn:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? ((legCount + 1) % 2 === 1 &&
                     gameSettings.startPlayerNum == 2) ||
                   ((legCount + 1) % 2 === 0 && gameSettings.startPlayerNum == 1)
                   ? false
                   : true
                 : true,
-            score: newValue === 0 ? gameSettings.points : player2.score,
-            dartsUsed: newValue === 0 ? 0 : player2.dartsUsed,
+            score: newValue >= gameSettings.points ? 0 : player2.score,
+            dartsUsed: newValue >= gameSettings.points ? 0 : player2.dartsUsed,
             dartsUsedPerLeg:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? [
                     ...player2.dartsUsedPerLeg,
                     [player2.dartsUsed + 3, false] as [number, boolean],
                   ]
                 : player2.dartsUsedPerLeg,
             legsWon:
-              newValue === 0 && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
                 ? 0
                 : player2.legsWon,
           },
@@ -341,7 +305,7 @@ export default function X01() {
       localStorage.setItem("history", JSON.stringify(newHistory));
       checkEnd(newValue, newHistory);
     } else if (player2.onTurn && player2.name !== "") {
-      const newValue = player2.score - Number(userInput);
+      const newValue = player2.score + Number(userInput);
       let totalDarts = 0;
       player2.dartsUsedPerLeg.forEach((d) => (totalDarts += d[0]));
       newHistory = [
@@ -350,33 +314,33 @@ export default function X01() {
           playerFirst: {
             ...player1,
             onTurn:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? ((legCount + 1) % 2 === 1 &&
                     gameSettings.startPlayerNum == 2) ||
                   ((legCount + 1) % 2 === 0 && gameSettings.startPlayerNum == 1)
                   ? true
                   : false
                 : true,
-            score: newValue === 0 ? gameSettings.points : player1.score,
-            dartsUsed: newValue === 0 ? 0 : player1.dartsUsed,
+            score: newValue >= gameSettings.points ? 0 : player1.score,
+            dartsUsed: newValue >= gameSettings.points ? 0 : player1.dartsUsed,
             dartsUsedPerLeg:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? [
                     ...player1.dartsUsedPerLeg,
                     [player1.dartsUsed + 3, false] as [number, boolean],
                   ]
                 : player1.dartsUsedPerLeg,
             legsWon:
-              newValue === 0 && player2.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points && player2.legsWon + 1 == gameSettings.legs
                 ? 0
                 : player1.legsWon,
           },
 
           playerSecond: {
             ...player2,
-            score: newValue === 0 ? gameSettings.points : newValue,
+            score: newValue >= gameSettings.points ? 0 : newValue,
             onTurn:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? ((legCount + 1) % 2 === 1 &&
                     gameSettings.startPlayerNum == 1) ||
                   ((legCount + 1) % 2 === 0 && gameSettings.startPlayerNum == 2)
@@ -389,19 +353,19 @@ export default function X01() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue === 0 ? 0 : player2.dartsUsed + 3,
+            dartsUsed: newValue >= gameSettings.points ? 0 : player2.dartsUsed + 3,
             legsWon:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? player2.legsWon + 1 == gameSettings.legs
                   ? 0
                   : player2.legsWon + 1
                 : player2.legsWon,
             setsWon:
-              newValue === 0 && player2.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points && player2.legsWon + 1 == gameSettings.legs
                 ? player2.setsWon + 1
                 : player2.setsWon,
             dartsUsedPerLeg:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? [
                     ...player2.dartsUsedPerLeg,
                     [player2.dartsUsed + 3, true] as [number, boolean],
@@ -439,7 +403,7 @@ export default function X01() {
       localStorage.setItem("history", JSON.stringify(newHistory));
       checkEnd(newValue, newHistory);
     } else {
-      const newValue = player1.score - Number(userInput);
+      const newValue = player1.score + Number(userInput);
       let totalDarts = 0;
       player1.dartsUsedPerLeg.forEach((d) => (totalDarts += d[0]));
       newHistory = [
@@ -447,7 +411,7 @@ export default function X01() {
         {
           playerFirst: {
             ...player1,
-            score: newValue === 0 ? gameSettings.points : newValue,
+            score: newValue >= gameSettings.points ? 0 : newValue,
             onTurn: true,
             threeDartAverage: calculateNewAverage(
               player1.threeDartAverage,
@@ -455,19 +419,19 @@ export default function X01() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue === 0 ? 0 : player1.dartsUsed + 3,
+            dartsUsed: newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
             legsWon:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? player1.legsWon + 1 == gameSettings.legs
                   ? 0
                   : player1.legsWon + 1
                 : player1.legsWon,
             setsWon:
-              newValue === 0 && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
                 ? player1.setsWon + 1
                 : player1.setsWon,
             dartsUsedPerLeg:
-              newValue === 0
+              newValue >= gameSettings.points
                 ? [
                     ...player1.dartsUsedPerLeg,
                     [player1.dartsUsed + 3, true] as [number, boolean],
@@ -510,7 +474,7 @@ export default function X01() {
   };
 
   const checkEnd = (score: number, newHistory: any) => {
-    if (score === 0) {
+    if (score >= gameSettings.points) {
       const latest = newHistory[newHistory.length - 1];
       if (!latest) return;
 
@@ -529,7 +493,7 @@ export default function X01() {
     const first = latest.playerFirst;
     const second = latest.playerSecond;
     const data = {
-      gameMode: "X01(" + gameSettings.points + ")",
+      gameMode: "CountUp(" + gameSettings.points + ")",
       isTraining: gameSettings.mode === "duel" ? false : true,
       userEmail: [gameSettings.players[0], gameSettings.players[1] || ""],
       subprofile: !gameSettings.players[1].includes("@")
@@ -540,7 +504,7 @@ export default function X01() {
       checkoutPercentage:
         player2.name === ""
           ? [100, 0]
-          : calculateCheckoutPercentage(history, gameSettings, latest, gameSettings.points),
+          : calculateCheckoutPercentage(history, gameSettings, latest, 0),
       score60Plus: [first.score60Plus, second.score60Plus || 0],
       score100Plus: [first.score100Plus, second.score100Plus || 0],
       score140Plus: [first.score140Plus, second.score140Plus || 0],
@@ -576,7 +540,7 @@ export default function X01() {
           console.log(data.message);
           setPasswdErr("");
           if(formData)
-            submitMatchData(formData, "startX01", router);
+            submitMatchData(formData, "startCountUp", router);
           else
             alert("Error: validating successfull, but new error accured")
         } else {
@@ -663,9 +627,8 @@ export default function X01() {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-between font-semibold text-textColorDark bg-modalBg p-2 rounded-xl shadow-lg shadow-modalShadow">
-          <p className="ml-5">{gameSettings.legStart.toUpperCase()}</p>
-          <p className="mr-5">{gameSettings.legFinish.toUpperCase()}</p>
+        <div className="w-full flex justify-center font-semibold text-textColorDark bg-modalBg p-2 rounded-xl shadow-lg shadow-modalShadow">
+          <p>COUNT UP TO {gameSettings.points} POINTS</p>
         </div>
       </div>
       {/* match summary modal */}
@@ -676,7 +639,7 @@ export default function X01() {
           formData={formData}
           gameSettings={gameSettings}
           setValidate={setValidate}
-          back={"startX01"}
+          back={"startCountUp"}
         />
       )}
       {/* password check */}
@@ -686,7 +649,7 @@ export default function X01() {
           passwdErr={passwdErr}
           passwdChange={passwdChange}
           handleValidate={handleValidate}
-          back={"startX01"}
+          back={"startCountUp"}
         />
       )}
     </div>
