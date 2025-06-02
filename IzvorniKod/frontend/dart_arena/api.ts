@@ -1,6 +1,6 @@
 export const apiCall = (url: `${string}`, options: RequestInit = {}) => {
     // popravi .env fajl
-    return fetch(`http://localhost:8080${url}`, {
+    return fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}${url}`, {
       ...options,
       headers: {
         ...options.headers,

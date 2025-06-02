@@ -22,23 +22,25 @@ export const fetchUserByEmail = async (email: string) => {
 
 // salji na backend
 export const submitMatchData = (data:Match, back:string, router:AppRouterInstance) => {  
-    apiCall(`/match/save`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  console.log(data);
+  
+  apiCall(`/match/save`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then(([data, status]) => {
+      if (status === 200) {
+        console.log(data.message);
+        alert("Match archived.");
+        router.push("/games/" + back);
+      } else {
+        console.log(data);
+      }
     })
-      .then(([data, status]) => {
-        if (status === 200) {
-          console.log(data.message);
-          alert("Match archived.");
-          router.push("/games/" + back);
-        } else {
-          console.log(data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .catch((error) => {
+      console.log(error);
+    });
 };

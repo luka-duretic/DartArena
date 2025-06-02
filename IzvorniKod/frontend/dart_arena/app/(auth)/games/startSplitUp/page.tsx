@@ -1,24 +1,75 @@
 "use client";
 
+import InfoButton2 from "@/app/components/InfoButton2";
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
 import GameStart from "@/app/components/GameStart";
 import { useGetUser } from "@/app/queries/getUserQuery";
+import { useGameSettings } from "@/app/settings/GameSettings";
+import { useRouter } from "next/navigation";
 
 export default function StartSplitUpPage() {
   const { token } = useAuth();
-  const userQuery = useGetUser()
+  const userQuery = useGetUser();
   const [formData, setFormData] = useState({
     legs: 1,
     sets: 1,
+    points: 40,
     mode: "training",
+    players: [userQuery.data?.email],
+    startPlayerNum: 1,
   });
   const leg_set_number = Array.from({ length: 35 }, (_, i) => i + 1);
+  const setSettings = useGameSettings((state) => state.setSettings);
+  const router = useRouter();
+  const clean = ["history", "game-settings", "end", "match", "validate", "round"]
 
   useEffect(() => {
+    for(let s of clean){
+      localStorage.removeItem(s);
+    }
+
     if (!token) return;
   }, []);
+
+  useEffect(() => {
+    setFormData({ ...formData, ["players"]: [userQuery.data?.email] });
+  }, [userQuery.data?.email]);
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSettings = (e: any) => {
+    setFormData({ ...formData, ["players"]: e.players });
+  };
+
+  const handleStart = (e: any) => {
+    e.preventDefault();
+    console.log(formData);
+
+    if (formData.players.length !== 2 && formData.mode === "duel") {
+      alert("Select your opponent");
+    } else {
+      alert("Begin your match");
+
+      setSettings({
+        players:
+          formData.players.length === 1
+            ? [...formData.players, ""]
+            : formData.players,
+        mode: formData.mode,
+        points: 40,
+        legs: formData.legs,
+        sets: formData.sets,
+        startPlayerNum: formData.startPlayerNum,
+      });
+
+      router.push("/games/SplitUp");
+    }
+  };
 
   if (userQuery.isLoading) {
     return (
@@ -29,21 +80,10 @@ export default function StartSplitUpPage() {
     );
   }
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // DOVRSI
-  const handleSubmit = () => {
-    console.log(formData);
-    alert("Success");
-  };
-
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[50%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
         <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
@@ -61,6 +101,7 @@ export default function StartSplitUpPage() {
             userInfo={userQuery.data}
             formData={formData}
             handleChange={handleChange}
+            handleSettings={handleSettings}
           />
           <div className="flex flex-col gap-4 justify-between items-center p-5 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="flex gap-2 items-center w-full">
@@ -72,10 +113,13 @@ export default function StartSplitUpPage() {
               </span>
             </div>
             {/* legs/sets odabir */}
-            <div className="flex gap-2 justify-around items-center mt-2 w-[82%]">
-              <div className="flex">
-                <div className="bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-35">
+            <div className="flex gap-3 justify-around items-center mt-2 w-[82%]">
+              <div className="flex w-full">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
                   Number of legs
+                </div>
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  Legs
                 </div>
                 <select
                   name="legs"
@@ -89,9 +133,12 @@ export default function StartSplitUpPage() {
                   ))}
                 </select>
               </div>
-              <div className="flex">
-                <div className="bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-35">
+              <div className="flex w-full">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
                   Number of sets
+                </div>
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                  Sets
                 </div>
                 <select
                   name="sets"
@@ -106,10 +153,46 @@ export default function StartSplitUpPage() {
                 </select>
               </div>
             </div>
+            <form
+              id="myForm"
+              onSubmit={handleStart}
+              className="flex flex-col gap-4 w-full"
+            >
+              {!(formData.mode === "training") && (
+                <div className="relative flex justify-center items-center gap-3">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                    <input
+                      type="radio"
+                      className="opacity-0 absolute"
+                      onChange={handleChange}
+                      name="startPlayerNum"
+                      value={1}
+                      required
+                    />
+                    Player1
+                  </label>
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                    <input
+                      type="radio"
+                      className="opacity-0 absolute"
+                      onChange={handleChange}
+                      name="startPlayerNum"
+                      value={2}
+                      required
+                    />
+                    Player 2
+                  </label>
+                  <div className="w-10 absolute top-[18%] right-[0%]">
+                    <InfoButton2 text={"Select who starts first."} />
+                  </div>
+                </div>
+              )}
+            </form>
           </div>
           <button
+            type="submit"
+            form="myForm"
             className="font-semibold text-xl text-white bg-teal-500 hover:bg-teal-600 ease-in-out rounded-lg shadow-lg shadow-modalShadow p-[10px] cursor-pointer hover:scale-[102.5%] transition duration-300"
-            onClick={handleSubmit}
           >
             START GAME
           </button>

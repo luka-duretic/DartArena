@@ -4,12 +4,12 @@ const config = defineConfig({
   preflight: false, // CSS reset aktivan
     globalCss: {
       "html, body": {
-        margin: "inherit",        // Resetuje marginu
-        padding: "inherit",       // Resetuje padding
-        fontFamily: "inherit", // Koristi tvoj font
+        margin: "inherit",        // resetiraj margin
+        padding: "inherit",       // resetiraj padding
+        fontFamily: "inherit", // koristi tvoj font
       },
       "*": {
-        boxSizing: "border-box", // Osigurava box-sizing za sve elemente
+        boxSizing: "border-box", // osigurava box-sizing za sve elemente
       },
     },
 });

@@ -27,7 +27,7 @@ export default function Games() {
   let x01 =
     'X01: This is a series of dart games where players start with a score of 301, 501, or another variant and aim to reduce their score to exactly zero. Players take turns throwing three darts per round, and the goal is to "check out" by finishing with a single, double or triple.';
   let shanghai =
-    'Shanghai: In this game, players aim to score points by hitting numbers 1 through 7. In each round, the player must hit the corresponding number in order. A "Shanghai" occurs when a player hits a single, double, and triple of the same number in a single turn.';
+    'Shanghai: In this game, players aim to score points by hitting numbers 1 through 20. In each round, the player must hit the corresponding number in order. A "Shanghai" occurs when a player hits a single, double, and triple of the same number in a single turn.';
   let cricket =
     "Cricket: In Cricket, players aim to hit numbers 15 through 20 and the bullseye three times each. Once a player hits a number three times, it is “closed,” and they can score points by hitting that number again before their opponent.";
   let countup =

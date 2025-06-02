@@ -49,7 +49,7 @@ export default function ValidateOpponent({
           />
         )}
         {passwdErr && (
-          <div className="text-red-700 text-xs md:text-sm ml-1 -mt-[8px] w-full flex justify-start">
+          <div className="text-red-500 text-xs md:text-sm ml-1 -mt-[8px] w-full flex justify-start">
             {passwdErr}
           </div>
         )}
