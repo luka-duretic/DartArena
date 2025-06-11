@@ -1,10 +1,10 @@
 "use client";
 
-import InfoButton2 from "@/app/components/InfoButton2";
+import InfoButton2 from "@/app/components/btn-layout-sliders/InfoButton2";
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import { LuSettings2 } from "react-icons/lu";
-import GameStart from "@/app/components/GameStart";
+import GameStart from "@/app/components/games-modals/GameStart";
 import { useGetUser } from "@/app/queries/getUserQuery";
 import { useGameSettings } from "@/app/settings/GameSettings";
 import { useRouter } from "next/navigation";
@@ -23,10 +23,18 @@ export default function StartCricketPage() {
   const leg_set_number = Array.from({ length: 35 }, (_, i) => i + 1);
   const setSettings = useGameSettings((state) => state.setSettings);
   const router = useRouter();
-  const clean = ["history", "game-settings", "end", "match", "validate", "round"]
+  const clean = [
+    "history",
+    "game-settings",
+    "end",
+    "match",
+    "validate",
+    "round",
+    "throws",
+  ];
 
   useEffect(() => {
-    for(let s of clean){
+    for (let s of clean) {
       localStorage.removeItem(s);
     }
 
@@ -160,7 +168,7 @@ export default function StartCricketPage() {
             >
               {!(formData.mode === "training") && (
                 <div className="relative flex justify-center items-center gap-3">
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"
@@ -171,7 +179,7 @@ export default function StartCricketPage() {
                     />
                     Player1
                   </label>
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-9 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"

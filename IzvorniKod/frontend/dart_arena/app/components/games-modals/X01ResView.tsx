@@ -3,7 +3,13 @@
 import { FaRegUser } from "react-icons/fa";
 import { GiArrowFlights, GiDart } from "react-icons/gi";
 
-export default function X01ResView({ gameSettings, player1, player2, end }: any) {
+export default function X01ResView({
+  gameSettings,
+  player1,
+  player2,
+  end,
+  throws,
+}: any) {
   return (
     <>
       <div className="w-full flex justify-center text-textColorDark font-medium animate-bounce">
@@ -75,35 +81,18 @@ export default function X01ResView({ gameSettings, player1, player2, end }: any)
         <div className="w-full flex justify-center items-center gap-3">
           <div
             className={
-              "h-[18rem] flex flex-col gap-5 items-center justify-center bg-background2/40 rounded-xl" +
+              "bg-background2/40 rounded-xl" +
               (gameSettings.mode === "duel" ? " w-[50%]" : " w-full")
             }
           >
-            {player1.imgUrl ? (
-              <img
-                src={player1.imgUrl}
-                alt="profile picture"
-                className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
-              />
-            ) : (
-              <FaRegUser className="p-1 h-20 w-20 text-indigo-500 border-4 border-indigo-500 rounded-full" />
-            )}
-            <div className="flex text-textColorDark font-semibold justify-around items-center w-[80%]">
-              <div className="flex gap-2">
-                <GiArrowFlights className="h-5 w-5" />
-                <p>({player1.dartsUsed})</p>
-              </div>
-              <div>avg: {player1.threeDartAverage}</div>
-            </div>
-            <div className={"text-7xl font-semibold" + (end ? " text-teal-200" : " text-teal-500")}>
-              {player1.score}
-            </div>
-          </div>
-          {gameSettings.mode === "duel" && (
-            <div className="w-[50%] h-[18rem] flex flex-col gap-5 items-center justify-center bg-background2/40 rounded-xl">
-              {player2.imgUrl ? (
+            <div
+              className={
+                "h-[18rem] flex flex-col gap-5 items-center justify-center"
+              }
+            >
+              {player1.imgUrl ? (
                 <img
-                  src={player2.imgUrl}
+                  src={player1.imgUrl}
                   alt="profile picture"
                   className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
                 />
@@ -113,13 +102,94 @@ export default function X01ResView({ gameSettings, player1, player2, end }: any)
               <div className="flex text-textColorDark font-semibold justify-around items-center w-[80%]">
                 <div className="flex gap-2">
                   <GiArrowFlights className="h-5 w-5" />
-                  <p>({player2.dartsUsed})</p>
+                  <p>({player1.dartsUsed})</p>
                 </div>
-                <div>avg: {player2.threeDartAverage}</div>
+                <div>avg: {player1.threeDartAverage}</div>
               </div>
-              <div className={"text-7xl font-semibold" + (end ? " text-teal-200" : " text-teal-500")}>
-                {player2.score}
+              <div
+                className={
+                  "text-7xl font-semibold" +
+                  (end ? " text-teal-200" : " text-teal-500")
+                }
+              >
+                {player1.score}
               </div>
+            </div>
+            {throws !== undefined && (
+              <div className="bg-background/30 rounded-lg m-1 -mt-4 flex justify-around items-center pb-1">
+                {throws.throwFirst.map((n: number, i: number) => (
+                  <div
+                    key={i}
+                    className="flex flex-col gap-1 justify-center items-center"
+                  >
+                    <div>{i + 15 === 21 ? 25 : i+15}</div>
+                    <div className="flex justify-center ml-2">
+                      {[...Array(3 - n)].map((_, j) => (
+                        <GiDart
+                          key={j}
+                          className="w-3 h-3 text-textColorDark -ml-[6px] rotate-12"
+                        />
+                      ))}
+                      {n === 3 && <div className="w-3 h-3"></div>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          {gameSettings.mode === "duel" && (
+            <div className={"bg-background2/40 rounded-xl w-[50%]"}>
+              <div
+                className={
+                  "h-[18rem] flex flex-col gap-5 items-center justify-center"
+                }
+              >
+                {player2.imgUrl ? (
+                  <img
+                    src={player2.imgUrl}
+                    alt="profile picture"
+                    className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
+                  />
+                ) : (
+                  <FaRegUser className="p-1 h-20 w-20 text-indigo-500 border-4 border-indigo-500 rounded-full" />
+                )}
+                <div className="flex text-textColorDark font-semibold justify-around items-center w-[80%]">
+                  <div className="flex gap-2">
+                    <GiArrowFlights className="h-5 w-5" />
+                    <p>({player2.dartsUsed})</p>
+                  </div>
+                  <div>avg: {player2.threeDartAverage}</div>
+                </div>
+                <div
+                  className={
+                    "text-7xl font-semibold" +
+                    (end ? " text-teal-200" : " text-teal-500")
+                  }
+                >
+                  {player2.score}
+                </div>
+              </div>
+              {throws !== undefined && (
+                <div className="bg-background/30 rounded-lg m-1 -mt-4 flex justify-around items-center pb-1">
+                  {throws.throwSecond.map((n: number, i: number) => (
+                    <div
+                      key={i}
+                      className="flex flex-col gap-1 justify-center items-center"
+                    >
+                      <div>{i + 15 === 21 ? 25 : i+15}</div>
+                      <div className="flex justify-center ml-2">
+                        {[...Array(3 - n)].map((_, j) => (
+                          <GiDart
+                            key={j}
+                            className="w-3 h-3 text-textColorDark -ml-[6px] rotate-12"
+                          />
+                        ))}
+                        {n === 3 && <div className="w-3 h-3"></div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>

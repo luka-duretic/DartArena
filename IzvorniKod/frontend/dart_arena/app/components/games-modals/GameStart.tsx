@@ -8,7 +8,7 @@ import { IoCloseCircleOutline } from "react-icons/io5";
 import { IoCloseCircle } from "react-icons/io5";
 import { HiUserCircle } from "react-icons/hi2";
 import { apiCall } from "@/api";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
 import { IoMdRemoveCircle } from "react-icons/io";
 

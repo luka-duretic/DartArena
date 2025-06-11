@@ -1,6 +1,6 @@
 "use client";
 
-import SliderCustom from "@/app/components/SliderCustom";
+import SliderCustom from "@/app/components/btn-layout-sliders/SliderCustom";
 import { useAuth } from "@/app/context/AuthContext";
 import { useEffect, useState } from "react";
 import { TbTargetArrow } from "react-icons/tb";

@@ -1,17 +1,23 @@
 "use client";
 
 import { apiCall } from "@/api";
-import MatchSummary from "@/app/components/MatchSummary";
+import MatchSummary from "@/app/components/stats-modals/MatchSummary";
 import ValidateOpponent from "@/app/components/ValidateOpponent";
-import X01ResView from "@/app/components/X01ResView";
-import { initialGameSettings, initialPlayer } from "@/app/constants/initalMatchObjects";
+import X01ResView from "@/app/components/games-modals/X01ResView";
+import {
+  initialGameSettings,
+  initialPlayer,
+} from "@/app/constants/initalMatchObjects";
 import { calculateNewAverage } from "@/app/helpers/avgFunction";
 import {
   calculatecheckoutDartsAverage,
   calculateCheckoutPercentage,
   totalLegsWon,
 } from "@/app/helpers/checkoutFunctions";
-import { fetchUserByEmail, submitMatchData } from "@/app/helpers/fetchFunctions";
+import {
+  fetchUserByEmail,
+  submitMatchData,
+} from "@/app/helpers/fetchFunctions";
 import setPlayers from "@/app/helpers/setPlayers";
 import { handleUndo } from "@/app/helpers/undoHistory";
 import { Match } from "@/app/interfaces/match";
@@ -193,8 +199,8 @@ export default function X01() {
       const isDoubleIn = gameSettings.legStart === "Double in";
       const isMasterIn = gameSettings.legStart === "Master in";
 
-      if (isDoubleIn && DI_forbiden.includes(number+"")) return;
-      if (isMasterIn && MI_forbiden.includes(number+"")) return;
+      if (isDoubleIn && DI_forbiden.includes(number + "")) return;
+      if (isMasterIn && MI_forbiden.includes(number + "")) return;
       setUserInput(number + "");
     } else {
       if (Number(userInput + number) < 181) {
@@ -540,7 +546,12 @@ export default function X01() {
       checkoutPercentage:
         player2.name === ""
           ? [100, 0]
-          : calculateCheckoutPercentage(history, gameSettings, latest, gameSettings.points),
+          : calculateCheckoutPercentage(
+              history,
+              gameSettings,
+              latest,
+              gameSettings.points
+            ),
       score60Plus: [first.score60Plus, second.score60Plus || 0],
       score100Plus: [first.score100Plus, second.score100Plus || 0],
       score140Plus: [first.score140Plus, second.score140Plus || 0],
@@ -575,10 +586,8 @@ export default function X01() {
         if (status === 200) {
           console.log(data.message);
           setPasswdErr("");
-          if(formData)
-            submitMatchData(formData, "startX01", router);
-          else
-            alert("Error: validating successfull, but new error accured")
+          if (formData) submitMatchData(formData, "startX01", router);
+          else alert("Error: validating successfull, but new error accured");
         } else {
           console.log(data);
           setPasswdErr(data.split("d: ")[1]);
@@ -586,10 +595,10 @@ export default function X01() {
       })
       .catch((error) => {
         console.log(error);
-        try{
+        try {
           setPasswdErr(error.split("d: ")[1]);
-        } catch(err){
-          setPasswdErr(JSON.stringify(error))
+        } catch (err) {
+          setPasswdErr(JSON.stringify(error));
         }
       });
   };

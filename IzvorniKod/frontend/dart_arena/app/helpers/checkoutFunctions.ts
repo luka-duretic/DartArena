@@ -32,3 +32,13 @@ export function totalLegsWon(player:any){
     const won = player.dartsUsedPerLeg.filter((d:any) => d[1] === true).length;
     return won; 
 }
+
+export function calculateCricketCheckoutPercentage(latest:any){
+    const totalLegsPlayed = latest.playerSecond.dartsUsedPerLeg.length
+    
+    const firstWon = latest.playerFirst.dartsUsedPerLeg.filter((d:any) => d[1] === true).length;
+    const secondWon = latest.playerSecond.dartsUsedPerLeg.filter((d:any) => d[1] === true).length;
+    
+    // zaokruzi na 2 decimale
+    return [Math.round((firstWon/(totalLegsPlayed))*100), Math.round((secondWon/(totalLegsPlayed))*100)];
+}

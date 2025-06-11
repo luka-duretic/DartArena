@@ -20,3 +20,8 @@ export interface Pair {
     playerFirst: Player;
     playerSecond: Player;
 }
+
+export interface NumbersPair {
+  throwFirst: number[];
+  throwSecond: number[];
+}

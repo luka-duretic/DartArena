@@ -1,9 +1,9 @@
 "use client";
 
 import { apiCall } from "@/api";
-import MatchSummary from "@/app/components/MatchSummary";
+import MatchSummary from "@/app/components/stats-modals/MatchSummary";
 import ValidateOpponent from "@/app/components/ValidateOpponent";
-import X01ResView from "@/app/components/X01ResView";
+import X01ResView from "@/app/components/games-modals/X01ResView";
 import { shanghaiInput, targets } from "@/app/constants/defaultMatchInputs";
 import {
   initialGameSettings,
@@ -260,7 +260,8 @@ export default function Shanghai() {
             legsWon:
               (r === 20 && player1.dartsUsed + 3 === player2.dartsUsed) ||
               shanghai
-                ? (newValue >= player2.score && !shanghai &&
+                ? (newValue >= player2.score &&
+                    !shanghai &&
                     player1.legsWon + 1 == gameSettings.legs) ||
                   (newValue < player2.score &&
                     player2.legsWon + 1 == gameSettings.legs) ||
@@ -329,7 +330,8 @@ export default function Shanghai() {
             legsWon:
               (r === 20 && player1.dartsUsed + 3 === player2.dartsUsed) ||
               shanghai
-                ? (newValue < player2.score && !shanghai &&
+                ? (newValue < player2.score &&
+                    !shanghai &&
                     player2.legsWon + 1 == gameSettings.legs) ||
                   (newValue >= player2.score &&
                     player1.legsWon + 1 == gameSettings.legs) ||
@@ -400,7 +402,8 @@ export default function Shanghai() {
             legsWon:
               (r === 20 && player2.dartsUsed + 3 === player1.dartsUsed) ||
               shanghai
-                ? (newValue <= player1.score && !shanghai &&
+                ? (newValue <= player1.score &&
+                    !shanghai &&
                     player1.legsWon + 1 == gameSettings.legs) ||
                   (newValue > player1.score &&
                     player2.legsWon + 1 == gameSettings.legs) ||
@@ -450,7 +453,8 @@ export default function Shanghai() {
             legsWon:
               (r === 20 && player2.dartsUsed + 3 === player1.dartsUsed) ||
               shanghai
-                ? (newValue <= player1.score && !shanghai &&
+                ? (newValue <= player1.score &&
+                    !shanghai &&
                     player1.legsWon + 1 == gameSettings.legs) ||
                   (newValue > player1.score &&
                     player2.legsWon + 1 == gameSettings.legs) ||
@@ -539,7 +543,7 @@ export default function Shanghai() {
     setUserInput([]);
   };
 
-  const checkEnd = (r: number, newHistory: any, shanghai:boolean) => {
+  const checkEnd = (r: number, newHistory: any, shanghai: boolean) => {
     const latest = newHistory[newHistory.length - 1];
     const p1 = latest.playerFirst.dartsUsed;
     const p2 = latest.playerSecond.dartsUsed;

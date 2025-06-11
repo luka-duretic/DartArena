@@ -1,6 +1,6 @@
 "use client"
 
-import InfoButton from "@/app/components/InfoButton";
+import InfoButton from "@/app/components/btn-layout-sliders/InfoButton";
 import { useAuth } from "@/app/context/AuthContext";
 import { useGetUser } from "@/app/queries/getUserQuery";
 import Link from "next/link";

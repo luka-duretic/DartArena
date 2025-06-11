@@ -1,9 +1,9 @@
 "use client";
 
 import { apiCall } from "@/api";
-import MatchSummary from "@/app/components/MatchSummary";
+import MatchSummary from "@/app/components/stats-modals/MatchSummary";
 import ValidateOpponent from "@/app/components/ValidateOpponent";
-import X01ResView from "@/app/components/X01ResView";
+import X01ResView from "@/app/components/games-modals/X01ResView";
 import { splitInput } from "@/app/constants/defaultMatchInputs";
 import {
   initialGameSettings,

@@ -1,17 +1,23 @@
 "use client";
 
 import { apiCall } from "@/api";
-import MatchSummary from "@/app/components/MatchSummary";
+import MatchSummary from "@/app/components/stats-modals/MatchSummary";
 import ValidateOpponent from "@/app/components/ValidateOpponent";
-import X01ResView from "@/app/components/X01ResView";
-import { initialGameSettings, initialPlayer } from "@/app/constants/initalMatchObjects";
+import X01ResView from "@/app/components/games-modals/X01ResView";
+import {
+  initialGameSettings,
+  initialPlayer,
+} from "@/app/constants/initalMatchObjects";
 import { calculateNewAverage } from "@/app/helpers/avgFunction";
 import {
   calculatecheckoutDartsAverage,
   calculateCheckoutPercentage,
   totalLegsWon,
 } from "@/app/helpers/checkoutFunctions";
-import { fetchUserByEmail, submitMatchData } from "@/app/helpers/fetchFunctions";
+import {
+  fetchUserByEmail,
+  submitMatchData,
+} from "@/app/helpers/fetchFunctions";
 import setPlayers from "@/app/helpers/setPlayers";
 import { handleUndo } from "@/app/helpers/undoHistory";
 import { Match } from "@/app/interfaces/match";
@@ -202,9 +208,7 @@ export default function CountUp() {
     let newHistory;
     const legCount =
       history.filter(
-        (h) =>
-          h.playerFirst.score === 0 &&
-          h.playerSecond.score === 0
+        (h) => h.playerFirst.score === 0 && h.playerSecond.score === 0
       ).length - 1; // zbog prvog zapisa history-a
 
     if (player1.onTurn && player2.name !== "") {
@@ -231,7 +235,8 @@ export default function CountUp() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
+            dartsUsed:
+              newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
             legsWon:
               newValue >= gameSettings.points
                 ? player1.legsWon + 1 == gameSettings.legs
@@ -239,7 +244,8 @@ export default function CountUp() {
                   : player1.legsWon + 1
                 : player1.legsWon,
             setsWon:
-              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points &&
+              player1.legsWon + 1 == gameSettings.legs
                 ? player1.setsWon + 1
                 : player1.setsWon,
             dartsUsedPerLeg:
@@ -294,7 +300,8 @@ export default function CountUp() {
                   ]
                 : player2.dartsUsedPerLeg,
             legsWon:
-              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points &&
+              player1.legsWon + 1 == gameSettings.legs
                 ? 0
                 : player2.legsWon,
           },
@@ -331,7 +338,8 @@ export default function CountUp() {
                   ]
                 : player1.dartsUsedPerLeg,
             legsWon:
-              newValue >= gameSettings.points && player2.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points &&
+              player2.legsWon + 1 == gameSettings.legs
                 ? 0
                 : player1.legsWon,
           },
@@ -353,7 +361,8 @@ export default function CountUp() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue >= gameSettings.points ? 0 : player2.dartsUsed + 3,
+            dartsUsed:
+              newValue >= gameSettings.points ? 0 : player2.dartsUsed + 3,
             legsWon:
               newValue >= gameSettings.points
                 ? player2.legsWon + 1 == gameSettings.legs
@@ -361,7 +370,8 @@ export default function CountUp() {
                   : player2.legsWon + 1
                 : player2.legsWon,
             setsWon:
-              newValue >= gameSettings.points && player2.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points &&
+              player2.legsWon + 1 == gameSettings.legs
                 ? player2.setsWon + 1
                 : player2.setsWon,
             dartsUsedPerLeg:
@@ -419,7 +429,8 @@ export default function CountUp() {
               Number(userInput),
               3
             ),
-            dartsUsed: newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
+            dartsUsed:
+              newValue >= gameSettings.points ? 0 : player1.dartsUsed + 3,
             legsWon:
               newValue >= gameSettings.points
                 ? player1.legsWon + 1 == gameSettings.legs
@@ -427,7 +438,8 @@ export default function CountUp() {
                   : player1.legsWon + 1
                 : player1.legsWon,
             setsWon:
-              newValue >= gameSettings.points && player1.legsWon + 1 == gameSettings.legs
+              newValue >= gameSettings.points &&
+              player1.legsWon + 1 == gameSettings.legs
                 ? player1.setsWon + 1
                 : player1.setsWon,
             dartsUsedPerLeg:
@@ -539,10 +551,8 @@ export default function CountUp() {
         if (status === 200) {
           console.log(data.message);
           setPasswdErr("");
-          if(formData)
-            submitMatchData(formData, "startCountUp", router);
-          else
-            alert("Error: validating successfull, but new error accured")
+          if (formData) submitMatchData(formData, "startCountUp", router);
+          else alert("Error: validating successfull, but new error accured");
         } else {
           console.log(data);
           setPasswdErr(data.split("d: ")[1]);
@@ -550,10 +560,10 @@ export default function CountUp() {
       })
       .catch((error) => {
         console.log(error);
-        try{
+        try {
           setPasswdErr(error.split("d: ")[1]);
-        } catch(err){
-          setPasswdErr(JSON.stringify(error))
+        } catch (err) {
+          setPasswdErr(JSON.stringify(error));
         }
       });
   };

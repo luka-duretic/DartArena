@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import Slider from "./components/Slider";
-import Footer from "./components/Footer";
+import Slider from "./components/btn-layout-sliders/Slider";
+import Footer from "./components/btn-layout-sliders/Footer";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [mobile, setMobile] = useState(false);
 
-  useEffect(() => {    
+  useEffect(() => {
     localStorage.setItem("mode", "light");
   });
 

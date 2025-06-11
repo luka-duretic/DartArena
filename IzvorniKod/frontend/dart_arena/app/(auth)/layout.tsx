@@ -8,7 +8,7 @@ import { MdOutlineSsidChart } from "react-icons/md";
 import { GiDart } from "react-icons/gi";
 import { CiLogout } from "react-icons/ci";
 import { useAuth } from "../context/AuthContext";
-import Footer from "../components/Footer";
+import Footer from "../components/btn-layout-sliders/Footer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
