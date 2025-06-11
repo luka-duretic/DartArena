@@ -27,6 +27,10 @@ public class MatchDto {
         this.average3Darts = average3Darts;
     }
 
+    public void addAverage3Darts(Double average3Darts) {
+        this.average3Darts.add(average3Darts);
+    }
+
     public List<Double> getCheckoutDartsAverage() {
         return checkoutDartsAverage;
     }
@@ -35,12 +39,20 @@ public class MatchDto {
         this.checkoutDartsAverage = checkoutDartsAverage;
     }
 
+    public void addCheckoutDartsAverage(Double checkoutDartsAverage) {
+        this.checkoutDartsAverage.add(checkoutDartsAverage);
+    }
+
     public List<Double> getCheckoutPercentage() {
         return checkoutPercentage;
     }
 
     public void setCheckoutPercentage(List<Double> checkoutPercentage) {
         this.checkoutPercentage = checkoutPercentage;
+    }
+
+    public void addCheckoutPercentage(Double checkoutPercentage) {
+        this.checkoutPercentage.add(checkoutPercentage);
     }
 
     public String getGameMode() {
@@ -67,12 +79,20 @@ public class MatchDto {
         this.legsWon = legsWon;
     }
 
+    public void addLegsWon(int legsWon) {
+        this.legsWon.add(legsWon);
+    }
+
     public List<Integer> getScore100Plus() {
         return score100Plus;
     }
 
     public void setScore100Plus(List<Integer> score100Plus) {
         this.score100Plus = score100Plus;
+    }
+
+    public void addScore100Plus(Integer score100Plus) {
+        this.score100Plus.add(score100Plus);
     }
 
     public List<Integer> getScore140Plus() {
@@ -83,12 +103,20 @@ public class MatchDto {
         this.score140Plus = score140Plus;
     }
 
+    public void addScore140Plus(Integer score140Plus) {
+        this.score140Plus.add(score140Plus);
+    }
+
     public List<Integer> getScore170() {
         return score170;
     }
 
     public void setScore170(List<Integer> score170) {
         this.score170 = score170;
+    }
+
+    public void addScore170(int score170) {
+        this.score170.add(score170);
     }
 
     public List<Integer> getScore170Plus() {
@@ -99,12 +127,20 @@ public class MatchDto {
         this.score170Plus = score170Plus;
     }
 
+    public void addScore170Plus(Integer score170Plus) {
+        this.score170Plus.add(score170Plus);
+    }
+
     public List<Integer> getScore180() {
         return score180;
     }
 
     public void setScore180(List<Integer> score180) {
         this.score180 = score180;
+    }
+
+    public void addScore180(int score180) {
+        this.score180.add(score180);
     }
 
     public List<Integer> getScore60Plus() {
@@ -115,12 +151,20 @@ public class MatchDto {
         this.score60Plus = score60Plus;
     }
 
+    public void addScore60Plus(int score60Plus) {
+        this.score60Plus.add(score60Plus);
+    }
+
     public List<Integer> getSetsWon() {
         return setsWon;
     }
 
     public void setSetsWon(List<Integer> setsWon) {
         this.setsWon = setsWon;
+    }
+
+    public void addSetsWon(int setsWon) {
+        this.setsWon.add(setsWon);
     }
 
     public String getSubprofile() {
@@ -137,5 +181,9 @@ public class MatchDto {
 
     public void setUserEmail(List<String> userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public void addUserEmail(String userEmail) {
+        this.userEmail.add(userEmail);
     }
 }

@@ -5,4 +5,5 @@ import java.util.*;
 
 public interface MatchService {
     public Map<String, String> archiveMatch(MatchDto match);
+    public List<MatchDto> getAllMatches(Long id);
 }

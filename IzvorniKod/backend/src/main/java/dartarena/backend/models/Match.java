@@ -68,7 +68,7 @@ public class Match {
         this.matchDate = matchDate;
     }
 
-    public List<MatchParticipant> getMatchParticipant() {
+    public List<MatchParticipant> getMatchParticipants() {
         return matchParticipants;
     }
 
