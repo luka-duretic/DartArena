@@ -13,7 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // vrijedi za sve putanje
-                .allowedOrigins("http://localhost:3000") // prilagodi front-end domain/port
+                .allowedOrigins("http://localhost:3000", "http://dartarena.onrender.com") // prilagodi front-end domain/port
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type") // Ako trebaš dopustiti sve headere
                 .allowCredentials(true); // Ako koristiš "withCredentials" u JS
