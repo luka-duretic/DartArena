@@ -56,11 +56,6 @@ export function ScoreLineChart({ data }: any) {
       height={400}
       width={undefined}
       margin={{ bottom: 30, top: 30 }}
-      slotProps={{
-        legend: {
-          
-        },
-      }}
     />
   );
 }

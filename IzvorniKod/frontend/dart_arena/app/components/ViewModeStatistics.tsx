@@ -20,6 +20,14 @@ export default function ViewModeStatistics({ mode }: any) {
     );
   }
 
+  if(!statsQuery.data || !statsQuery.data.dates || statsQuery.data.dates.length === 0){
+    return (
+      <div className="h-full text-textColorDark flex flex-col justify-center items-center gap-2">
+        No mode matches played yet.
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col h-full gap-4 w-full px-3">
       {mode === "X01" || mode === "CountUp" ? (
