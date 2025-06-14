@@ -68,7 +68,7 @@ export default function StartCountUpPage() {
         startPlayerNum: formData.startPlayerNum,
       });
 
-      router.push("/games/CountUp");
+      router.push("/games/countUp");
     }
   };
 

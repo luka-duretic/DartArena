@@ -74,7 +74,7 @@ export default function StartX01Page() {
         startPlayerNum: formData.startPlayerNum,
       });
 
-      router.push("/games/X01");
+      router.push("/games/x01");
     }
   };
 

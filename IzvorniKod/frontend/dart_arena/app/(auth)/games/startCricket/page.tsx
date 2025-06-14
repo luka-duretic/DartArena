@@ -75,7 +75,7 @@ export default function StartCricketPage() {
         startPlayerNum: formData.startPlayerNum,
       });
 
-      router.push("/games/Cricket");
+      router.push("/games/cricket");
     }
   };
 

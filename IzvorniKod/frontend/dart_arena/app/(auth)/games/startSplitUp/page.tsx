@@ -74,7 +74,7 @@ export default function StartSplitUpPage() {
         startPlayerNum: formData.startPlayerNum,
       });
 
-      router.push("/games/SplitUp");
+      router.push("/games/splitUp");
     }
   };
 

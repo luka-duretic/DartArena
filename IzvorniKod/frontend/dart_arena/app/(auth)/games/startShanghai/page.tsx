@@ -74,7 +74,7 @@ export default function StartShanghaiPage() {
         startPlayerNum: formData.startPlayerNum,
       });
 
-      router.push("/games/Shanghai");
+      router.push("/games/shanghai");
     }
   };
 
