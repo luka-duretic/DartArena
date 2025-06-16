@@ -27,11 +27,13 @@ const signUpSchema = z.object({
   team: z
     .string()
     .min(4, "Team name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect team name format"),
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect team name format")
+    .optional(),
   league: z
     .string()
     .min(4, "League name must be at least 4 characters long")
-    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect league name format"),
+    .regex(/^[a-zA-Z][a-zA-Z0-9._\s]*$/, "Incorrect league name format")
+    .optional(),
 });
 
 function SignUpPage() {
@@ -68,12 +70,21 @@ function SignUpPage() {
     e.preventDefault();
 
     try {
-      signUpSchema.parse(formData);
+      const data = Object.fromEntries(
+        Object.entries(formData).map(([key, value]) => [
+          key,
+          value === ""
+            ? undefined
+            : value,
+        ])
+      );
+
+      signUpSchema.parse(data);
       setErrors({});
 
       apiCall(`/user/auth/register`, {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },

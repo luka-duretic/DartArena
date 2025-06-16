@@ -12,6 +12,7 @@ import { z } from "zod";
 import { apiCall } from "@/api";
 import { jwtDecode } from "jwt-decode";
 import { useGetUser, User } from "@/app/queries/getUserQuery";
+import { useGetUserStats } from "@/app/queries/getUserStatsQuery";
 
 interface MyJwtPayload {
   id: number;
@@ -66,17 +67,11 @@ const editSchema = z.object({
 export default function ProfilePage() {
   const { token, logout } = useAuth();
   const userQuery = useGetUser();
+  const userStats = useGetUserStats();
   const [change, setChange] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [submit, setSubmit] = useState(false);
   const [errors, setErrors] = useState({});
-  const [userStats, setUserStats] = useState<UserStats>({
-    user: userQuery.data,
-    total170: 0,
-    total170Plus: 0,
-    total180: 0,
-    totalMatches: 0,
-  });
   const [serverError, setServerError] = useState("");
   const [formData, setFormData] = useState({
     firstName: userQuery.data?.firstName,
@@ -108,27 +103,11 @@ export default function ProfilePage() {
       dartsName: userQuery.data?.dartsName || "",
       dartsWeight: userQuery.data?.dartsWeight || null,
     });
-
-    if (token) {
-      let userId = jwtDecode<MyJwtPayload>(token).id;
-
-      apiCall(`/userstats/${userId}`, {
-        method: "GET",
-      })
-        .then(([data, status]) => {
-          if (status === 200) {
-            setUserStats(data);
-          } else {
-            console.log(data);
-          }
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    }
   }, [userQuery.data, token]);
 
-  if (userQuery.isLoading && !token) {
+  if (userQuery.isLoading || userStats.isLoading) {
+    console.log(userQuery.isLoading, !token, userStats.isLoading);
+    
     return (
       <div className="absolute top-[50%] left-[50%] text-textColorDark flex flex-col justify-center items-center gap-2">
         <div>Loading...</div>
@@ -311,7 +290,7 @@ export default function ProfilePage() {
                 {/* left */}
                 <div className="flex flex-col justify-center items-center border-r-2 border-b-2 w-40 p-1">
                   <div className="font-semibold text-2xl">
-                    {userStats.total170Plus}
+                    {userStats.data?.total170Plus}
                   </div>
                   <div className="opacity-60 text-sm font-semibold">
                     170+ score
@@ -320,7 +299,7 @@ export default function ProfilePage() {
                 {/* right */}
                 <div className="flex flex-col justify-center items-center border-b-2 border-l-2 w-40 p-1">
                   <div className="font-semibold text-2xl">
-                    {userStats.total180}
+                    {userStats.data?.total180}
                   </div>
                   <div className="opacity-60 text-sm font-semibold">
                     180s score
@@ -332,7 +311,7 @@ export default function ProfilePage() {
                 {/* left */}
                 <div className="flex flex-col justify-center items-center border-t-2 border-r-2 w-40 p-1">
                   <div className="font-semibold text-2xl">
-                    {userStats.total170}
+                    {userStats.data?.total170}
                   </div>
                   <div className="opacity-60 text-sm font-semibold">
                     "Big fish" (170 finishes)
@@ -341,7 +320,7 @@ export default function ProfilePage() {
                 {/* right */}
                 <div className="flex flex-col justify-center items-center border-t-2 border-l-2 w-40 p-1">
                   <div className="font-semibold text-2xl">
-                    {userStats.totalMatches}
+                    {userStats.data?.totalMatches}
                   </div>
                   <div className="opacity-60 text-sm font-semibold">
                     matches played
