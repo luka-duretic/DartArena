@@ -39,12 +39,12 @@ export default function ValidateOpponent({
         />
         {show ? (
           <FiEyeOff
-            className="absolute w-[18px] h-[18px] top-[80px] right-8 cursor-pointer"
+            className="absolute w-[18px] h-[18px] top-[49%] xs:top-[43%] right-[12%] xs:right-[7%] cursor-pointer"
             onClick={() => setShow(!show)}
           />
         ) : (
           <FiEye
-            className="absolute w-[18px] h-[18px] top-[80px] right-8 cursor-pointer"
+            className="absolute w-[18px] h-[18px] top-[49%] xs:top-[43%] right-[12%] xs:right-[7%] cursor-pointer"
             onClick={() => setShow(!show)}
           />
         )}

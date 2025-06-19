@@ -29,11 +29,11 @@ export default function Home() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[55%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
-        <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
+        <div className="opacity-0 xs:opacity-100 rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
-            className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
+            className="w-full h-[2.5rem] xs:h-[6.4rem] bg-cover flex justify-center items-center rounded-lg"
             style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <img src="/images/logo.png" alt="logo" className="w-50 h-full" />
@@ -53,8 +53,8 @@ export default function Home() {
               <div className="text-textColorDark">
                 <div className="font-semibold text-lg">PLAY NOW</div>
                 <div className="text-base">
-                  Select the game mode and enjoy. Train to improve or play with
-                  friends.
+                  Select the game mode and enjoy. <p className="hidden xs:inline">Train to improve or play with
+                  friends.</p>
                 </div>
               </div>
             </Link>
@@ -66,7 +66,7 @@ export default function Home() {
               <div className="text-textColorDark">
                 <div className="font-semibold text-lg">VIEW PROFILE</div>
                 <div className="text-base">
-                  Here you can always see stats summary, edit and update your
+                  Here you can always <p className="hidden xs:inline">see stats summary, edit and</p> update your
                   info.
                 </div>
               </div>

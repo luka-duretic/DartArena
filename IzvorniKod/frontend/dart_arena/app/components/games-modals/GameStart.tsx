@@ -121,12 +121,12 @@ export default function GameStart({
             <div className="rounded-full bg-background2 p-[6px]">
               <BiSolidUserDetail className="text-textColorDark h-7 w-7" />
             </div>
-            <span className="font-semibold text-xl text-textColorDark">
+            <span className="font-semibold text-base sm:text-xl text-textColorDark">
               PLAYER DETAILS
             </span>
           </div>
-          <div className="flex">
-            <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-tl-lg rounded-bl-lg w-40 h-9 flex justify-center items-center transition duration-250">
+          <div className="flex flex-col sm:flex-row">
+            <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark text-sm sm:text-base bg-modalBg border-[1.5px] border-textColorDark rounded-t-lg sm:rounded-t-none sm:rounded-tl-lg sm:rounded-bl-lg w-20 sm:w-40 h-9 flex justify-center items-center transition duration-250">
               <input
                 type="radio"
                 className="opacity-0 absolute"
@@ -138,7 +138,7 @@ export default function GameStart({
               />
               Training
             </label>
-            <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-tr-lg rounded-br-lg w-40 h-9 flex justify-center items-center transition duration-250">
+            <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark text-sm sm:text-base bg-modalBg border-[1.5px] border-textColorDark rounded-b-lg sm:rounded-b-none sm:rounded-tr-lg sm:rounded-br-lg w-20 sm:w-40 h-9 flex justify-center items-center transition duration-250">
               <input
                 type="radio"
                 className="opacity-0 absolute"
@@ -159,7 +159,7 @@ export default function GameStart({
               : " justify-around")
           }
         >
-          <div className="flex flex-col justify-center items-center gap-2">
+          <div className="flex flex-col justify-center items-center gap-2 w-[42%]">
             {userInfo?.profileImgURL ? (
               <img
                 src={userInfo?.profileImgURL}
@@ -169,18 +169,18 @@ export default function GameStart({
             ) : (
               <FaRegUser className="p-1 h-17 w-17 text-indigo-500 border-4 border-indigo-500 rounded-full" />
             )}
-            <span className="flex justify-center font-medium text-textColorDark text-lg">
+            <span className="flex justify-center break-all font-medium text-textColorDark text-lg">
               {userInfo?.nickName}
             </span>
           </div>
           {formData.mode === "duel" && (
-            <span className="text-textColorDark text-2xl font-semibold">
+            <span className="text-textColorDark text-2xl flex justify-center font-semibold w-[10%]">
               vs
             </span>
           )}
           {formData.mode === "duel" &&
             (opponent.name !== "" ? (
-              <div className="flex flex-col justify-center items-center">
+              <div className="flex flex-col justify-center items-center w-[42%]">
                 <div className="relative">
                   <IoMdRemoveCircle
                     className="absolute top-[10%] left-[75%] h-4 w-4 text-red-500 hover:scale-115 transition duration-300"
@@ -193,26 +193,29 @@ export default function GameStart({
                       className="object-cover h-17 w-17 border-2 border-indigo-600 rounded-full p-0 m-0"
                     />
                   ) : (
-                    <HiUserCircle className="h-17 w-17 text-indigo-500 rounded-full" />
+                    <HiUserCircle className="h-20 w-20 -mt-1 text-indigo-500 rounded-full" />
                   )}
                 </div>
-                <span className="flex justify-center font-medium text-textColorDark text-lg">
+                <span className="flex justify-center break-all font-medium text-textColorDark text-lg">
                   {opponent.name}
                 </span>
               </div>
             ) : (
-              <div>
+              <div className="w-[42%] flex flex-col justify-center items-center">
                 <IoIosAddCircleOutline
-                  className="h-17 w-17 text-textColorDark cursor-pointer"
+                  className="h-20 w-20 text-textColorDark cursor-pointer"
                   onClick={() => setOpen(true)}
                 />
+                <span className="opacity-0 text-lg">
+                  sdasd
+                </span>
               </div>
             ))}
         </div>
       </div>
       {open && (
         <div className="fixed inset-0 z-30 bg-black/40 flex justify-center items-center">
-          <div className="zoom-in-bounce h-[21rem] w-[45%] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
+          <div className="zoom-in-bounce h-[21rem] w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
             <div className="flex justify-between items-center w-full">
               <div></div>
               <span className="text-textColorDark text-lg font-semibold">
@@ -274,11 +277,10 @@ export default function GameStart({
                 </div>
               )}
             </div>
-            <div className="text-textColorDark font-semibold w-[70%] break-before flex flex-col justify-center items-center">
-              <span>Your friend doesn't have an account, don't worry</span>
-              <span>you can use temporary user instead</span>
+            <div className="text-textColorDark font-semibold w-full break-before flex flex-col justify-center items-center">
+              <span>Your friend doesn't have an account, don't worry you can use temporary user instead</span>
             </div>
-            <div className="w-[90%] overflow-x-auto overflow-y-hidden px-4">
+            <div className="w-[90%] h-40 -mt-3 overflow-x-auto overflow-y-hidden px-4">
               <div className="inline-flex gap-2 items-center min-w-full justify-center">
                 {subprofileList.map((op: any) => (
                   <div
@@ -326,7 +328,7 @@ export default function GameStart({
       )}
       {createOpen && (
         <div className="fixed inset-0 z-30 bg-black/40 flex justify-center items-center">
-          <div className="h-[15rem] w-[35%] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
+          <div className="h-[15rem] w-[21rem] bg-background rounded-lg flex flex-col items-center gap-6 p-5">
             <span className="font-semibold text-textColorDark text-lg">
               CREATE NEW SUBPROFILE
             </span>

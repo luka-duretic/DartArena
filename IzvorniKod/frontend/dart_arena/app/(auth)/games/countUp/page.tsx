@@ -584,7 +584,7 @@ export default function CountUp() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-[14px]">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full flex flex-col gap-3 pt-[14px]">
         {/* result display modal */}
         <X01ResView
           gameSettings={gameSettings}
@@ -610,7 +610,7 @@ export default function CountUp() {
               <div
                 key={i}
                 onClick={() => handleInput(i)}
-                className="w-[32%] flex justify-center items-center p-3 bg-background/60 rounded-lg hover:bg-background/80 hover:scale-[102%] transition duration-[340ms]"
+                className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-background/60 rounded-lg hover:bg-background/80 hover:scale-[102%] transition duration-[340ms]"
               >
                 {i}
               </div>
@@ -619,19 +619,19 @@ export default function CountUp() {
           <div className="flex justify-center items-center gap-2 w-full -mt-1">
             <div
               onClick={() => setUserInput("0")}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               CLEAR
             </div>
             <div
               onClick={() => handleInput(0)}
-              className="w-[32%] flex justify-center items-center p-3 bg-background/60 rounded-lg hover:bg-background/80 hover:scale-[102%] transition duration-[340ms]"
+              className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-background/60 rounded-lg hover:bg-background/80 hover:scale-[102%] transition duration-[340ms]"
             >
               0
             </div>
             <div
               onClick={handleScore}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               OK
             </div>

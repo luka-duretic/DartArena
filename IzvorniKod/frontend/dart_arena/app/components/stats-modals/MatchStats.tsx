@@ -6,23 +6,23 @@ import { RiCloseCircleFill } from "react-icons/ri";
 
 export default function MatchSummary({ player1, player2, setOpen }: any) {
   return (
-    <div className="cursor-default inset-0 fixed bg-black/30 backdrop-blur-sm z-30 text-textColorDark flex flex-col gap-2 justify-center items-center">
+    <div className="cursor-default inset-0 fixed min-h-screen bg-black/30 backdrop-blur-sm z-30 text-textColorDark flex flex-col gap-2 justify-center items-center">
       <div
         className={
-          "zoom-in-bounce w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] flex flex-col items-center gap-4 py-4 px-6 bg-modalBg rounded-xl shadow-lg shadow-modalShadow" +
-          (player2.name === "" ? " h-[42.5rem]" : " h-[40.5rem]")
+          "zoom-in-bounce w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] flex flex-col items-center gap-4 py-4 px-6 bg-modalBg rounded-xl shadow-lg shadow-modalShadow" +
+          (player2.name === "" ? " h-[42.5rem]" : " h-[41.5rem] sm:h-[40.5rem]")
         }
       >
-        <div className="flex justify-between items-center w-full">
-          <div className="w-[20%]"></div>
-          <div className="w-[50%] flex justify-center items-center font-bold text-xl">
+        <div className="relative flex justify-between items-center w-full">
+          <div className="w-full flex justify-center items-center font-bold text-xl">
             MATCH STATS
           </div>
-          <div className="w-[20%] flex justify-end cursor-pointer">
-            <div onClick={() => setOpen(false)} className="group flex">
-              <RiCloseCircleLine className="block group-hover:hidden w-6 h-6" />
-              <RiCloseCircleFill className="hidden group-hover:block w-6 h-6 text-red-600" />
-            </div>
+          <div
+            onClick={() => setOpen(false)}
+            className="group flex absolute top-[-15%] left-[95%]"
+          >
+            <RiCloseCircleLine className="block group-hover:hidden w-6 h-6" />
+            <RiCloseCircleFill className="hidden group-hover:block w-6 h-6 text-red-600" />
           </div>
         </div>
         {/* players */}
@@ -32,7 +32,7 @@ export default function MatchSummary({ player1, player2, setOpen }: any) {
               "flex justify-start items-center " +
               (player2.name === ""
                 ? "w-full flex-col mt-2 gap-1"
-                : "w-[40%] gap-4")
+                : "w-[40%] flex-col mt-4 sm:mt-0 sm:flex-row gap-4")
             }
           >
             {player1.imgUrl ? (
@@ -44,7 +44,7 @@ export default function MatchSummary({ player1, player2, setOpen }: any) {
             ) : (
               <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 rounded-full" />
             )}
-            <p className="break-all">{player1.name.toUpperCase()}</p>
+            <p className="break-all text-sm sm:text-base">{player1.name.toUpperCase()}</p>
           </div>
           {player2.name !== "" && (
             <div className="font-bold flex justify-center items-center w-[20%]">
@@ -52,7 +52,7 @@ export default function MatchSummary({ player1, player2, setOpen }: any) {
             </div>
           )}
           {player2.name !== "" && (
-            <div className="flex flex-row-reverse gap-4 justify-start items-center w-[40%]">
+            <div className="flex flex-col sm:flex-row-reverse gap-4 mt-3 sm:mt-0 justify-start items-center w-[40%]">
               {player2.imgUrl ? (
                 <img
                   src={player2.imgUrl}
@@ -62,7 +62,7 @@ export default function MatchSummary({ player1, player2, setOpen }: any) {
               ) : (
                 <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 p-0 rounded-full" />
               )}
-              <p className="break-all">{player2.name.toUpperCase()}</p>
+              <p className="break-all text-sm sm:text-base">{player2.name.toUpperCase()}</p>
             </div>
           )}
         </div>

@@ -651,7 +651,7 @@ export default function Shanghai() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-[14px]">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full flex flex-col gap-3 pt-[14px]">
         {/* result display modal */}
         <X01ResView
           gameSettings={gameSettings}
@@ -684,7 +684,7 @@ export default function Shanghai() {
                 key={s}
                 onClick={() => handleInput(s)}
                 className={
-                  "relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                  "relative w-[30%] xs:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                   (userInput.includes(s)
                     ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                     : "bg-background/60 hover:bg-background/80")
@@ -702,14 +702,14 @@ export default function Shanghai() {
           <div className="flex justify-center items-center gap-2 w-full -mt-1">
             <div
               onClick={() => setUserInput([])}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] xs:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               CLEAR
             </div>
             <div
               onClick={() => handleInput("MISS")}
               className={
-                " relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                " relative w-[30%] xs:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                 (userInput.includes("MISS")
                   ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                   : "bg-background/60 hover:bg-background/80")
@@ -724,7 +724,7 @@ export default function Shanghai() {
             </div>
             <div
               onClick={handleScore}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] xs:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               OK
             </div>
@@ -760,7 +760,7 @@ export default function Shanghai() {
       )}
       {/* shanghai popup */}
       {show && (
-        <div className="inset-0 fixed bg-black/20 z-30 text-textColorDark flex flex-col gap-2 justify-center items-center">
+        <div className="hidden inset-0 fixed bg-black/20 z-30 text-textColorDark xs:flex flex-col gap-2 justify-center items-center">
           <div className="zoom-in-bounce">
             <svg
               width="700"

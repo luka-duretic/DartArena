@@ -1,5 +1,5 @@
 export const apiCall = (url: `${string}`, options: RequestInit = {}) => {
-    // popravi .env fajl
+    
     return fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}${url}`, {
       ...options,
       headers: {

@@ -84,11 +84,11 @@ export default function StartCountUpPage() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-full xs:w-[90%] sm:w-[80%] md:w-[74%] lg:w-[57%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
-        <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
+        <div className="opacity-0 xs:opacity-100 rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
-            className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
+            className="w-full h-[2.5rem] xs:h-[6.4rem] bg-cover flex justify-center items-center rounded-lg"
             style={{ backgroundImage: "url('../images/bg1.png')" }}
           >
             <span className="m-8 font-semibold text-white text-2xl">
@@ -114,12 +114,12 @@ export default function StartCountUpPage() {
               </span>
             </div>
             {/* legs/sets odabir */}
-            <div className="flex gap-3 justify-center items-center mt-2 w-[82%]">
+            <div className="flex gap-3 justify-center items-center mt-2 w-[90%]">
               <div className="flex w-full">
-                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
-                  Number of legs
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
+                  Legs count
                 </div>
-                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
                   Legs
                 </div>
                 <select
@@ -136,10 +136,10 @@ export default function StartCountUpPage() {
                 </select>
               </div>
               <div className="flex w-full">
-                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
-                  Number of sets
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
+                  Sets count
                 </div>
-                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
                   Sets
                 </div>
                 <select
@@ -156,10 +156,10 @@ export default function StartCountUpPage() {
                 </select>
               </div>
               <div className="flex w-full">
-                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                <div className="hidden md:block bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
                   X01 points
                 </div>
-                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-[86%]">
+                <div className="block md:hidden bg-modalBg rounded-tl-lg rounded-bl-lg text-textColorDark border-[1.2px] border-textColorDark/60 p-2 w-full">
                   X01
                 </div>
                 <select
@@ -183,7 +183,7 @@ export default function StartCountUpPage() {
             >
               {!(formData.mode === "training") && (
                 <div className="relative flex justify-center items-center gap-3">
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[29%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"
@@ -194,7 +194,7 @@ export default function StartCountUpPage() {
                     />
                     Player1
                   </label>
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[29%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"

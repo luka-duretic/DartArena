@@ -738,7 +738,7 @@ export default function Cricket() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-[14px]">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full flex flex-col gap-3 pt-[14px]">
         {/* result display modal */}
         <X01ResView
           gameSettings={gameSettings}
@@ -774,7 +774,7 @@ export default function Cricket() {
                   key={s}
                   onClick={() => handleInput(s)}
                   className={
-                    "relative w-[15.3%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                    "relative w-[14%] xs:w-[14.5%] sm:w-[15.3%] text-sm xs:text-xl flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                     (userInput.includes(s)
                       ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                       : "bg-background/60 hover:bg-background/80")
@@ -792,7 +792,7 @@ export default function Cricket() {
             <div
               onClick={() => handleInput("25")}
               className={
-                "relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                "relative w-[30%] sm:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                 (userInput.includes("25")
                   ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                   : "bg-background/60 hover:bg-background/80")
@@ -808,7 +808,7 @@ export default function Cricket() {
             <div
               onClick={() => handleInput("50")}
               className={
-                "relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                "relative w-[30%] sm:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                 (userInput.includes("50")
                   ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                   : "bg-background/60 hover:bg-background/80")
@@ -824,7 +824,7 @@ export default function Cricket() {
             <div
               onClick={() => handleInput("MISS")}
               className={
-                " relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
+                " relative w-[30%] sm:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] " +
                 (userInput.includes("MISS")
                   ? "bg-indigo-500/25 border-1 border-indigo-500 text-white hover:bg-indigo-500/40"
                   : "bg-background/60 hover:bg-background/80")
@@ -841,20 +841,20 @@ export default function Cricket() {
           <div className="flex justify-center items-center gap-2 w-full -mt-1">
             <div
               onClick={() => setUserInput([])}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               CLEAR
             </div>
             <div
               className={
-                "relative w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] bg-background/60 hover:bg-background/80"
+                "relative w-[30%] sm:w-[32%] flex justify-center items-center p-3 rounded-lg hover:scale-[102%] transition duration-[340ms] bg-background/60 hover:bg-background/80"
               }
             >
               <p className="opacity-0">fake</p>
             </div>
             <div
               onClick={handleScore}
-              className="w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
+              className="w-[30%] sm:w-[32%] flex justify-center items-center p-3 bg-indigo-500 text-gray-100 rounded-lg hover:bg-indigo-600 hover:scale-[102%] transition duration-[340ms] cursor-pointer"
             >
               OK
             </div>

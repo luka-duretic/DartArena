@@ -72,7 +72,7 @@ export default function SliderCustom() {
                   <img
                     src={ad.name}
                     alt={"ad"}
-                    className="w-full h-[95%] rounded-lg object-cover"
+                    className="w-full h-[95%] rounded-lg object-contain md:object-cover"
                     id="about"
                   />
                 </Link>

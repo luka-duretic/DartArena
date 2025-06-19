@@ -34,7 +34,7 @@ const SideBar = () => {
   return (
     <div>
       {/* gumb za otvaranje/zatvaranje SideBar-a */}
-      <div className="fixed top-5 left-5">
+      <div className="fixed top-3 left-3 z-30 bg-background2 p-[10px] pr-[4px] rounded-lg">
         <MenuButton isOpen={isOpen} toggleSideBar={toggleSideBar} />
       </div>
 

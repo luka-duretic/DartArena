@@ -80,12 +80,12 @@ export default function MatchModal({ match }: any) {
             <img
               src={userQuery.data.profileImgURL}
               alt="profile picture"
-              className="object-cover h-16 w-16 border-2 border-indigo-600 rounded-full p-0 m-0"
+              className="object-cover h-12 w-12 sm:h-16 sm:w-16 border-2 border-indigo-600 rounded-full p-0 m-0"
             />
           ) : (
-            <FaRegUser className="p-1 h-16 w-16 text-indigo-500 border-4 border-indigo-500 rounded-full" />
+            <FaRegUser className="p-1 h-12 w-12 sm:h-16 sm:w-16 text-indigo-500 border-4 border-indigo-500 rounded-full" />
           )}
-          <p className="font-semibold text-lg">{userQuery.data.nickName}</p>
+          <p className="font-semibold text-sm sm:text-lg">{userQuery.data.nickName}</p>
         </div>
         {player2.name !== "" ? (
           <div className="w-[27%] font-bold flex flex-col justify-between items-center text-xl">
@@ -93,21 +93,21 @@ export default function MatchModal({ match }: any) {
               {match.gameMode}
             </p>
             <div className="w-full flex justify-between items-center">
-              <p className="text-3xl">{player1.setsWon}</p>
-              <p>H2H</p>
-              <p className="text-3xl">{player2.setsWon}</p>
+              <p className="text-2xl sm:text-3xl">{player1.setsWon}</p>
+              <p className="text-base mx-2 sm:mx-0 sm:text-xl">H2H</p>
+              <p className="text-2xl sm:text-3xl">{player2.setsWon}</p>
             </div>
             <p className="opacity-0">fake</p>
           </div>
         ) : (
-          <div className="w-[59%] font-bold -mt-4 flex flex-col gap-1 justify-end items-end text-xl ">
-            <p className="w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-lg">
+          <div className="w-[59%] bg-amber-00 font-bold -mt-4 flex flex-col gap-1 justify-end items-end text-xl ">
+            <p className="w-[10rem] sm:w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-sm sm:text-lg">
               MODE: {match?.gameMode}
             </p>
-            <p className="w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-lg">
+            <p className="w-[10rem] sm:w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-sm sm:text-lg">
               SETS: {player1.setsWon}
             </p>
-            <p className="w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-lg">
+            <p className="w-[10rem] sm:w-[13rem] flex justify-center bg-modalBg/50 rounded-lg py-1 text-sm sm:text-lg">
               AVG: {player1.average3Darts}
             </p>
           </div>
@@ -118,12 +118,12 @@ export default function MatchModal({ match }: any) {
               <img
                 src={player2.imgUrl}
                 alt="profile picture"
-                className="object-cover h-16 w-16 border-2 border-indigo-600 rounded-full p-0 m-0"
+                className="object-cover h-12 w-12 sm:h-16 sm:w-16 border-2 border-indigo-600 rounded-full p-0 m-0"
               />
             ) : (
-              <FaRegUser className="p-1 h-16 w-16 text-indigo-500 border-4 border-indigo-500 rounded-full" />
+              <FaRegUser className="p-1 h-12 w-12 sm:h-16 sm:w-16 text-indigo-500 border-4 border-indigo-500 rounded-full" />
             )}
-            <p className="font-semibold text-lg">{player2.name}</p>
+            <p className="font-semibold text-sm sm:text-lg">{player2.name}</p>
           </div>
         )}
       </div>

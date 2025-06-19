@@ -31,19 +31,19 @@ export default function ViewModeStatistics({ mode }: any) {
   return (
     <div className="flex flex-col h-full gap-4 w-full px-3">
       {mode === "X01" || mode === "CountUp" ? (
-        <div className="bg-background/40 rounded-xl shadow-modalShadow shadow-2xl p-4 flex justify-center items-center w-full">
+        <div className="bg-background/40 rounded-xl shadow-modalShadow shadow-2xl p-4 pl-0 flex justify-center items-center w-full">
           {option === "averages" && (
             <AvgCheckLineChart data={statsQuery.data} />
           )}
           {option === "scores" && <ScoreLineChart data={statsQuery.data} />}
         </div>
       ) : (
-        <div className="bg-background/40 rounded-xl shadow-modalShadow shadow-2xl p-4 flex justify-center items-center w-full">
+        <div className="bg-background/40 rounded-xl shadow-modalShadow shadow-2xl p-4 pl-0 flex justify-center items-center w-full">
           <AvgCheckLineChart data={statsQuery.data} />
         </div>
       )}
-      <div className="flex justify-between h-full items-end w-full">
-        <div className="flex gap-2 w-full">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-0 justify-between h-full items-end w-full">
+        <div className="flex gap-2 justify-between sm:justify-start w-full">
           <label className={
               (mode === "X01" || mode === "CountUp"
                 ? "has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white bg-modalBg"
@@ -86,7 +86,7 @@ export default function ViewModeStatistics({ mode }: any) {
         </div>
         <div
           onClick={() => router.push("/games/start" + mode)}
-          className="flex justify-center items-center w-[15rem] py-2 bg-indigo-500 text-white rounded-lg shadow-lg shadow-modalShadow hover:scale-[103%] transition duration-300 cursor-pointer"
+          className="flex justify-center items-center w-full sm:w-[15rem] py-2 bg-indigo-500 text-white rounded-lg shadow-lg shadow-modalShadow hover:scale-[103%] transition duration-300 cursor-pointer"
         >
           Start {mode} match
         </div>

@@ -38,11 +38,11 @@ export default function Games() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[55%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
-        <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
+        <div className="opacity-0 xs:opacity-100 rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
-            className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
+            className="w-full h-[2.5rem] xs:h-[6.4rem] bg-cover flex justify-center items-center rounded-lg"
             style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <span className="m-8 font-semibold text-white text-2xl">
@@ -51,54 +51,54 @@ export default function Games() {
           </div>
         </div>
         {/* ostali modali */}
-        <div className="flex flex-col gap-3 w-full h-[88%]">
-          <Link href={"/games/startX01"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+        <div className="flex flex-col gap-3 w-full h-[44rem]">
+          <Link href={"/games/startX01"} className="flex justify-between h-[8rem] items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               X01
             </div>
             <div className="w-10 flex justify-end">
-              <InfoButton text={x01} />
+              <InfoButton text={x01} where={"down"}/>
             </div>
           </Link>
 
-          <Link href={"/games/startCricket"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startCricket"} className="flex justify-between h-[8rem] items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               CRICKET
             </div>
             <div className="w-10 flex justify-end">
-              <InfoButton text={cricket} />
+              <InfoButton text={cricket} where={"down"}/>
             </div>
           </Link>
 
-          <Link href={"/games/startShanghai"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startShanghai"} className="flex justify-between h-[8rem] items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               SHANGHAI
             </div>
             <div className="w-10 flex justify-end">
-              <InfoButton text={shanghai} />
+              <InfoButton text={shanghai} where={"down"}/>
             </div>
           </Link>
 
-          <Link href={"/games/startSplitUp"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startSplitUp"} className="flex justify-between h-[8rem] items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               SPLIT UP
             </div>
             <div className="w-10 flex justify-end">
-              <InfoButton text={splitup} />
+              <InfoButton text={splitup} where={"up"}/>
             </div>
           </Link>
 
-          <Link href={"/games/startCountUp"} className="flex justify-between items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <Link href={"/games/startCountUp"} className="flex justify-between h-[8rem] items-center cursor-pointer p-7 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             <div className="font-semibold text-2xl flex items-center gap-2">
               <GiTargetArrows />
               COUNT UP
             </div>
             <div className="flex w-10 justify-end">
-              <InfoButton text={countup} />
+              <InfoButton text={countup} where={"up"}/>
             </div>
           </Link>
         </div>

@@ -10,12 +10,12 @@ export default function ProfileDetails({
 }: any) {
 
   return (
-    <div className="h-[98%] p-4 flex gap-1 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
-      <div className="flex flex-col gap-1 w-[50%]">
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">FIRSTNAME</span>
+    <div className="h-[30rem] xs:h-[33rem] p-4 flex flex-col xs:flex-row overflow-y-auto xs:overflow-y-hidden gap-2 xs:gap-1 bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+      <div className="flex flex-col gap-2 xs:gap-1 w-full xs:w-[50%]">
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">FIRSTNAME</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -40,10 +40,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">LASTNAME</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">LASTNAME</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -68,10 +68,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">EMAIL</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">EMAIL</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -101,10 +101,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">NICKNAME</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">NICKNAME</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -130,11 +130,11 @@ export default function ProfileDetails({
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-1 w-[50%]">
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">DARTS NAME</span>
+      <div className="flex flex-col gap-2 xs:gap-1 w-full xs:w-[50%]">
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">DARTS NAME</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -159,10 +159,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">DARTS WEIGHT</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">DARTS WEIGHT</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -187,10 +187,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">LEAGUE</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">LEAGUE</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"
@@ -215,10 +215,10 @@ export default function ProfileDetails({
             </div>
           </div>
         </div>
-        <div className="p-2 bg-background2/55 h-[7rem] rounded-lg w-full">
-          <span className="font-semibold text-base pl-1">TEAM</span>
+        <div className="p-2 bg-background2/55 h-[6.2rem] xs:h-[7rem] rounded-lg w-full">
+          <span className="font-semibold text-sm xs:text-base pl-1">TEAM</span>
           <div className="flex gap-1 justify-start items-center w-full">
-            <GiArrowFlights className="h-5 w-5 mt-2" />
+            <GiArrowFlights className="w-4 h-4 xs:h-5 xs:w-5 mt-2" />
             <div className="w-full">
               <input
                 type="text"

@@ -91,11 +91,11 @@ export default function StartCricketPage() {
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] h-full flex flex-col gap-3 pt-5">
+      <div className="w-[90%] sm:w-[80%] md:w-[74%] lg:w-[57%] h-full flex flex-col gap-3 pt-5">
         {/* logo traka */}
-        <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
+        <div className="opacity-0 xs:opacity-100 rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
-            className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
+            className="w-full h-[2.5rem] xs:h-[6.4rem] bg-cover flex justify-center items-center rounded-lg"
             style={{ backgroundImage: "url('../images/bg1.png')" }}
           >
             <span className="m-8 font-semibold text-white text-2xl">
@@ -168,7 +168,7 @@ export default function StartCricketPage() {
             >
               {!(formData.mode === "training") && (
                 <div className="relative flex justify-center items-center gap-3">
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[40%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"
@@ -179,7 +179,7 @@ export default function StartCricketPage() {
                     />
                     Player1
                   </label>
-                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[26.5%] h-10 flex justify-center items-center transition duration-250">
+                  <label className="has-[:checked]:bg-indigo-500 has-[:checked]:border-none has-[:checked]:text-white text-textColorDark bg-modalBg border-[1.5px] border-textColorDark rounded-lg w-[40%] h-10 flex justify-center items-center transition duration-250">
                     <input
                       type="radio"
                       className="opacity-0 absolute"

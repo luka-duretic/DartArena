@@ -18,8 +18,8 @@ export default function MatchSummary({
     <div className="inset-0 fixed bg-black/30 backdrop-blur-sm z-30 text-textColorDark flex flex-col gap-2 justify-center items-center">
       <div
         className={
-          "zoom-in-bounce w-[80%] sm:w-[70%] md:w-[65%] lg:w-[50%] flex flex-col items-center gap-4 py-4 px-6 bg-modalBg rounded-xl shadow-lg shadow-modalShadow" +
-          (player2.name === "" ? " h-[42.5rem]" : " h-[40.5rem]")
+          "zoom-in-bounce w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] flex flex-col items-center gap-4 py-4 px-6 bg-modalBg rounded-xl shadow-lg shadow-modalShadow" +
+          (player2.name === "" ? " h-[42.5rem]" : "h-[42.5rem] xs:h-[40.5rem]")
         }
       >
         <div className="w-full flex justify-center items-center font-bold text-xl">
@@ -32,7 +32,7 @@ export default function MatchSummary({
               "flex justify-start items-center " +
               (player2.name === ""
                 ? "w-full flex-col mt-2 gap-1"
-                : "w-[40%] gap-4")
+                : "w-[40%] mt-2 flex-col xs:flex-row gap-4")
             }
           >
             {player1.imgUrl ? (
@@ -44,7 +44,7 @@ export default function MatchSummary({
             ) : (
               <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 rounded-full" />
             )}
-            <p className="break-all">{player1.name.toUpperCase()}</p>
+            <p className="break-all text-sm xs:text-lg">{player1.name.toUpperCase()}</p>
           </div>
           {player2.name !== "" && (
             <div className="font-bold flex justify-center items-center w-[20%]">
@@ -52,7 +52,7 @@ export default function MatchSummary({
             </div>
           )}
           {player2.name !== "" && (
-            <div className="flex flex-row-reverse gap-4 justify-start items-center w-[40%]">
+            <div className="flex flex-col xs:flex-row-reverse gap-4 justify-start items-center w-[40%]">
               {player2.imgUrl ? (
                 <img
                   src={player2.imgUrl}
@@ -62,7 +62,7 @@ export default function MatchSummary({
               ) : (
                 <HiUserCircle className="h-[54px] w-[54px] text-indigo-600 p-0 rounded-full" />
               )}
-              <p className="break-all">{player2.name.toUpperCase()}</p>
+              <p className="break-all text-sm xs:text-lg">{player2.name.toUpperCase()}</p>
             </div>
           )}
         </div>

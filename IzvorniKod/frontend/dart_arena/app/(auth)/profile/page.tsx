@@ -181,7 +181,7 @@ export default function ProfilePage() {
         ])
       );
 
-      editSchema.parse(data);
+      editSchema.parse(data);      
       let userId = jwtDecode<MyJwtPayload>(token).id;
 
       apiCall(`/user/update/${userId}`, {
@@ -227,41 +227,42 @@ export default function ProfilePage() {
       dartsWeight: userQuery.data?.dartsWeight || null,
     });
     setChange(false);
+    setErrors("")
   };
 
   return (
     <div className="min-h-screen min-w-screen bg-background2 text-textColorDark flex justify-center items-start">
       {/* sadrzaj u sredini */}
-      <div className="w-[55%] h-full bg-yellow flex flex-col gap-3 pt-5">
+      <div className="w-[90%] sm:w-[80%] md:w-[70%] lg:w-[55%] h-full bg-yellow flex flex-col gap-3 pt-5">
         {/* logo traka */}
-        <div className="rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
+        <div className="opacity-0 xs:opacity-100 rounded-lg bg-gradient-to-l from-purple-500 to-purple-900 p-[2px]">
           <div
-            className="w-full h-[12%] bg-cover flex justify-center items-center rounded-lg"
+            className="w-full h-[2.5rem] xs:h-[6.4rem] bg-cover flex justify-center items-center rounded-lg"
             style={{ backgroundImage: "url('/images/bg1.png')" }}
           >
             <img src="/images/logo.png" alt="logo" className="w-50 h-full" />
           </div>
         </div>
         {/* ostali modali */}
-        <div className="flex flex-col gap-3 w-full h-[80vh]">
+        <div className="flex flex-col gap-3 w-full">
           {/* profile summary */}
-          <div className="flex justify-between h-[25%] bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
+          <div className="flex flex-col sm:flex-row justify-between bg-modalBg rounded-lg shadow-lg shadow-modalShadow hover:scale-[102%] transition duration-300">
             {/* left div */}
-            <div className="flex flex-col justify-between p-4">
-              <div className="flex gap-5 justify-center items-center">
-                <div className="relative">
+            <div className="flex sm:flex-col justify-between p-4">
+              <div className="flex gap-2 sm:gap-5 sm:justify-center items-center">
+                <div className="relative w-[50%] sm:w-full">
                   {userQuery.data?.profileImgURL ? (
                     <img
                       src={userQuery.data?.profileImgURL}
                       alt="profile picture"
-                      className="object-cover h-20 w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
+                      className="object-cover h-15 w-15 sm:h-20 sm:w-20 border-2 border-indigo-600 rounded-full p-0 m-0"
                     />
                   ) : (
-                    <FaRegUser className="p-1 h-20 w-20 text-indigo-500 border-4 border-indigo-500 rounded-full" />
+                    <FaRegUser className="p-1 h-15 w-15 sm:h-20 sm:w-20 text-indigo-500 border-4 border-indigo-500 rounded-full" />
                   )}
                   <label
                     htmlFor="imageUpload"
-                    className="absolute text-indigo-500 top-13 left-13 h-8 w-8 rounded-full bg-background2 p-1"
+                    className="absolute text-indigo-500 top-[55%] left-[65%] sm:top-13 sm:left-13 h-8 w-8 rounded-full bg-background2 p-1"
                   >
                     <MdOutlineFlipCameraIos className="h-6 w-6 cursor-pointer" />
                   </label>
@@ -274,21 +275,22 @@ export default function ProfilePage() {
                     onChange={handleImageUpload}
                   />
                 </div>
-                <span className="font-semibold text-2xl">
+                <span className="font-semibold text-lg sm:text-2xl">
                   {userQuery.data?.nickName}
                 </span>
               </div>
-              <div className="opacity-50 flex gap-3 items-center justify-center">
-                <i>Date joined: {userQuery.data?.joinDate.split("T")[0]}</i>
+              <div className="opacity-50 w-[50%] sm:w-full flex gap-3 items-center justify-end sm:justify-center">
+                <i className="hidden sm:inline">Date joined: {userQuery.data?.joinDate.split("T")[0]}</i>
+                <i className="text-sm sm:hidden"><p>Date joined:</p> <p>{userQuery.data?.joinDate.split("T")[0]}</p></i>
                 <img src={flagUrl} alt="flag" className="h-4 w-7 mt-1"></img>
               </div>
             </div>
             {/* right div */}
-            <div className="flex flex-col p-4 pr-6 justify-center items-center">
+            <div className="hidden sm:flex flex-col p-4 pr-6 justify-center items-center">
               {/* upper div */}
               <div className="flex">
                 {/* left */}
-                <div className="flex flex-col justify-center items-center border-r-2 border-b-2 w-40 p-1">
+                <div className="flex flex-col justify-center items-center border-r-2 border-b-2 w-30 md:w-35 p-1">
                   <div className="font-semibold text-2xl">
                     {userStats.data?.total170Plus}
                   </div>
@@ -297,7 +299,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 {/* right */}
-                <div className="flex flex-col justify-center items-center border-b-2 border-l-2 w-40 p-1">
+                <div className="flex flex-col justify-center items-center border-b-2 border-l-2 w-30 md:w-35 p-1">
                   <div className="font-semibold text-2xl">
                     {userStats.data?.total180}
                   </div>
@@ -309,16 +311,16 @@ export default function ProfilePage() {
               {/* lower div */}
               <div className="flex">
                 {/* left */}
-                <div className="flex flex-col justify-center items-center border-t-2 border-r-2 w-40 p-1">
+                <div className="flex flex-col justify-center items-center border-t-2 border-r-2 w-30 md:w-35 p-1">
                   <div className="font-semibold text-2xl">
                     {userStats.data?.total170}
                   </div>
                   <div className="opacity-60 text-sm font-semibold">
-                    "Big fish" (170 finishes)
+                    170 finishes
                   </div>
                 </div>
                 {/* right */}
-                <div className="flex flex-col justify-center items-center border-t-2 border-l-2 w-40 p-1">
+                <div className="flex flex-col justify-center items-center border-t-2 border-l-2 w-30 md:w-35 p-1">
                   <div className="font-semibold text-2xl">
                     {userStats.data?.totalMatches}
                   </div>
@@ -328,9 +330,44 @@ export default function ProfilePage() {
                 </div>
               </div>
             </div>
+            {/* right div mobile view */}
+            <div className="flex sm:hidden h-15 pb-3 justify-center items-center">
+                <div className="flex flex-col justify-center items-center border-r-2 w-40 p-1">
+                  <div className="font-semibold text-xl">
+                    {userStats.data?.total170Plus}
+                  </div>
+                  <div className="opacity-60 text-xs font-semibold">
+                    170+ 
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center border-r-2 w-40 p-1">
+                  <div className="font-semibold text-xl">
+                    {userStats.data?.total180}
+                  </div>
+                  <div className="opacity-60 text-xs font-semibold">
+                    180
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center border-r-2 w-40 p-1">
+                  <div className="font-semibold text-xl">
+                    {userStats.data?.total170}
+                  </div>
+                  <div className="opacity-60 text-xs font-semibold">
+                    "Big fish"
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center items-center w-40 p-1">
+                  <div className="font-semibold text-xl">
+                    {userStats.data?.totalMatches}
+                  </div>
+                  <div className="opacity-60 text-xs font-semibold">
+                    matches
+                  </div>
+                </div>
+            </div>
           </div>
           {/* profile data */}
-          <div className="relative h-[75%] w-full">
+          <div className="relative w-full">
             <ProfileDetails
               user={userQuery.data}
               data={formData}
@@ -341,7 +378,7 @@ export default function ProfilePage() {
             />
             {/* gumbi za potvrdu/odbacivanje promjena informacija profila */}
             {change && (
-              <div className="absolute top-[83%] left-[103%] flex flex-col gap-2">
+              <div className="absolute top-[75%] left-[90%] z-30 sm:top-[78%] sm:left-[101%] bg-background2 p-2 rounded-lg xs:bg-none flex flex-col gap-2">
                 <div
                   className="group hover:bg-gray-300 hover:scale-110 transition duration-300 rounded-xl p-1 cursor-pointer"
                   onClick={handleSubmit}
