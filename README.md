@@ -46,7 +46,7 @@ Instructions how to run DartArena project localy on your device.
 
 2. Setup project's front-end:
    - open DartArena/IzvorniKod/frontend in your IDE (Visual Studio Code, ...)
-   - there create .env file and write - NEXT_PUBLIC_BACKEND_API=http://localhost:8080
+   - there create .env file and write `NEXT_PUBLIC_BACKEND_API=http://localhost:8080`
    - execute:
    ```
    1. npm install
