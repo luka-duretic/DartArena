@@ -70,7 +70,7 @@ Instructions how to run DartArena project localy on your device.
      - in app's Run Configurations add Enviromental variables listed belove, and apply
      ```
      SPRING_DATABASE_PASSWORD=your-supabase-project-passwd
-     SPRING_DATABASE_URL=jdbc:[your-supabase-project-connection-string]?sslmode=require
+     SPRING_DATABASE_URL=jdbc:[your-supabase-project-connection-string-url-part]?sslmode=require
      SPRING_DATABASE_USERNAME=postgres.your-supabase-project-id
      SPRING_JWT_SECRET=your-secretly-generated-256bits-key
      SUPABASE_PROJECT_ID=your-supabase-project-id
