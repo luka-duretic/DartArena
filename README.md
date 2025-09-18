@@ -6,12 +6,26 @@ This project is the result of independet student work as part of the project ass
 
 Darts is a popular board game traditionally played with a physical target and an automated scoring system. Given that many players want to accurately track their results, as well as their achievements in different types of games, there is a need for an application that would allow the game without a physical target, but with the ability to record all statistics. In this work, it is necessary to develop a web application that simulates the game of classic darts, while allowing users to enter the results of each game themselves. The application should support different types of games, such as X01, Cricket, Shanghai, Count Up and Split, and enable correct scoring depending on the type of game selected. In addition, the application should record statistical parameters such as three darts average, number of maximum scores hit (180 points), etc., and visually display them to users. All games should be created so that they can be played individually as a training session or as a duel against another user.
 
+The app provides signed-in users with personalized performance data, including detailed graphs and summaries. Track your progress over time by playing against opponents or practicing solo. Designed for all darts enthusiasts — from beginners to professionals — this application is the perfect tool to improve your game and analyze your statistics.
+
+### Main Features
+More detailed view of the list belove is represented with UML Use-case diagram, [click here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-functional-requirements).
+ - user account management (UC1, UC2, UC3, UC4, UC5)
+ - game modes (UC6, UC7)
+ - result and statistics tracking (UC8, UC9 - detail statistics view)
+ - game management (UC10, UC11, UC12 - temporary local save of subprofile's match data)
+ - user-friendly UI (UC13 - every match summary and stats, UC14, UC15, UC16)
+
 ## Technologies
 Front-end - React + TypeScript
  - frameworks - Next.js, Tailwind CSS
  - libraries - Material UI, React-Icons, Bootstrap, Zod
 
-Back-end - Java + Spring Boot
+Back-end - Java (21) + Spring Boot (3.4.4)
+ - build tool - Maven
+ - framework dependencies - (spring-boot-starter) security, web, test, validation, data-jpa
+ - database dependencies - postgresql, h2
+ - authentication dependencies -  jjwt-jackson, jwt-impl, jjwt-api
 
 Database - Supabase PostgreSQL
 
@@ -19,6 +33,12 @@ Authentication - JSON Web Token
 
 Deployment - on Render as web-services (frontend, backend)
  - [dartarena-frontend.onrender.com](https://dartarena-frontend.onrender.com/), currently web-app is not LIVE!
+
+## Architecture
+This app is developed with principles of MVC architecture to achieve separation of user interface logic, business logic and data. Therefore communication between layers and data transaction are based on REST API. All communication is secured by JWT authentication and data filtering.
+ - front-end - user interface logic, initiate interaction with server, file-based routing
+ - back-end - business/server logic, database access, data validation
+ - database - online platform Supabase, relational, connected to server with Hibernate ORM
 
 ## Local Installation
 Instructions how to run DartArena project localy on your device.
@@ -59,3 +79,5 @@ Instructions how to run DartArena project localy on your device.
      * you will find this variables in your supabase project *
      ```
      - run app (DartarenaApplication.java)
+
+Application demo and image of pages are available [here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-images) without need of installing hole app.
