@@ -61,7 +61,7 @@ Instructions how to run DartArena project localy on your device.
    - click Connect at navbar, select session pooler, get database connection string
    - find project id at Project Settings
    - find secret service role at Project Settings/API Keys
-   - go to Storage, add new bucket with name "avatars"
+   - go to Storage, add new bucket with name "avatars" and "public" option
 
 4. Setup project's back-end:
      - open DartArena/IzvorniKod/backend in your IDE (IntelliJ IDEA, ...)
