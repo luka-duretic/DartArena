@@ -9,7 +9,7 @@ Darts is a popular board game traditionally played with a physical target and an
 The app provides signed-in users with personalized performance data, including detailed graphs and summaries. Track your progress over time by playing against opponents or practicing solo. Designed for all darts enthusiasts — from beginners to professionals — this application is the perfect tool to improve your game and analyze your statistics.
 
 ### Main Features
-More detailed view of the list belove is represented with UML Use-case diagram, [click here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-functional-requirements).
+More detailed view of the list belove is represented with UML Use-Case diagram, [click here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-functional-requirements).
  - user account management (UC1, UC2, UC3, UC4, UC5)
  - game modes (UC6, UC7)
  - result and statistics tracking (UC8, UC9 - detail statistics view)
@@ -80,4 +80,4 @@ Instructions how to run DartArena project localy on your device.
      ```
      - run app (DartarenaApplication.java)
 
-Application demo and image of pages are available [here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-images) without need of installing hole app.
+Application demo and image of pages are available [here](https://github.com/luka-duretic/DartArena/tree/main/docs/app-images) without need to install hole app.
