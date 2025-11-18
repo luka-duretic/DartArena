@@ -227,7 +227,7 @@ export default function ProfilePage() {
       dartsWeight: userQuery.data?.dartsWeight || null,
     });
     setChange(false);
-    setErrors("")
+    setErrors({})
   };
 
   return (
